@@ -1,5 +1,11 @@
-public class Powerstone implements Item {
-    private String type;
-    
-    
+public class Powerstone extends Item {
+
+    Powerstone() {
+        super("Powerstone");
+    }
+
+    @Override
+    public void use(Player player, Combatant target) {
+        
+    }
 }
