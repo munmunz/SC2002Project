@@ -38,7 +38,12 @@ public abstract class Combatant{
     }
 
     public void performActions(Action action,Combatant target){
-
+    		if (action.isValid(this)) {
+    			action.execute();
+    		}
+    		else {
+    			System.out.println(getName() + " cannot perform that action!");
+    		}
     }
 
     public String getName(){
