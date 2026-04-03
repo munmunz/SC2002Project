@@ -1,39 +1,39 @@
-public class ShieldBash implements Action {
-    private Combatant user;
-    private Combatant target;
+import java.util.ArrayList;
 
-    public ShieldBash(Combatant user, Combatant target) {
-        this.user = user;
-        this.target = target;
+public class Powerstone implements Item {
+    private final String type;
+
+    Powerstone() {
+        this.type = "Power Stone";
     }
 
-    public boolean isValid(Combatant user) {
-        if (!(user instanceof Player)) {
-            return false;
-        }
-
-        Player player = (Player) user;
-
-        if (player.getSkillCooldown() > 0) {
-            System.out.println("ShieldBash is on cooldown! (" + player.getSkillCooldown() + " turns remaining)");
-            return false;
-        }
-
-        return target != null && target.getHealthPoints() > 0;
+    @Override
+    public String getType() {
+        return type;
     }
 
-    public void execute() {
-        int damage = Math.max(0, user.getAttack() - target.getDefense());
-        int newHp = Math.max(0, target.getHealthPoints() - damage);
-        target.setHealthPoints(newHp);
-        System.out.println(user.getName() + " uses Shield Bash on " + target.getName()
-                + " for " + damage + " damage!");
+    @Override
+    public void use(Player player, Combatant target, ArrayList<Combatant> enemies) {
+        int originalCooldown = player.getSkillCooldown();
 
-        if (newHp > 0) {
-            // Stun status will be applied once the concrete status class exists.
+        if (player instanceof Warrior) {
+            player.setSkillCooldown(0);
+            Action freeSkill = new ShieldBash(player, target);
+            if (freeSkill.isValid(player)) {
+                freeSkill.execute();
+            }
+            player.setSkillCooldown(originalCooldown);
+            return;
         }
 
-        ((Player) user).setSkillCooldown(3);
+        if (player instanceof Wizard) {
+            player.setSkillCooldown(0);
+            Action freeSkill = new ArcaneBlast(player, enemies);
+            if (freeSkill.isValid(player)) {
+                freeSkill.execute();
+            }
+            player.setSkillCooldown(originalCooldown);
+        }
     }
 }
 
