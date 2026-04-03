@@ -1,4 +1,6 @@
+import java.util.ArrayList;
+
 public interface Item {
-    public String getType();
-    public void use(Player player, Combatant target);
+    String getType();
+    void use(Player player, Combatant target, ArrayList<Combatant> enemies);
 }

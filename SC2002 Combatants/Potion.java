@@ -1,21 +1,23 @@
-public class Potion implements Item {
-    private String type;
-    int healAmount;
+import java.util.ArrayList;
 
-    Potion(){
+public class Potion implements Item {
+    private final String type;
+    private final int healAmount;
+
+    Potion() {
         this.type = "Potion";
         this.healAmount = 100;
     }
 
     @Override
-    public String getType(){
+    public String getType() {
         return type;
     }
 
     @Override
-    public void use(Player player, Combatant target){
-        int newHealthPoints = player.getHealthPoints() + 100;
-        if(newHealthPoints > player.getMaxHealthPoints()){
+    public void use(Player player, Combatant target, ArrayList<Combatant> enemies) {
+        int newHealthPoints = player.getHealthPoints() + healAmount;
+        if (newHealthPoints > player.getMaxHealthPoints()) {
             newHealthPoints = player.getMaxHealthPoints();
         }
         player.setHealthPoints(newHealthPoints);
