@@ -13,7 +13,11 @@ public class Powerstone implements Item {
     }
 
     @Override
+<<<<<<< Updated upstream
     public void use(Player player, Combatant target, ArrayList<Combatant> enemies) {
+=======
+    public void use(Player player, Combatant target) {
+>>>>>>> Stashed changes
         int originalCooldown = player.getSkillCooldown();
 
         if (player instanceof Warrior) {
@@ -27,8 +31,18 @@ public class Powerstone implements Item {
         }
 
         if (player instanceof Wizard) {
+<<<<<<< Updated upstream
             player.setSkillCooldown(0);
             Action freeSkill = new ArcaneBlast(player, enemies);
+=======
+            ArrayList<Combatant> singleTargetList = new ArrayList<>();
+            if (target != null) {
+                singleTargetList.add(target);
+            }
+
+            player.setSkillCooldown(0);
+            Action freeSkill = new ArcaneBlast(player, singleTargetList);
+>>>>>>> Stashed changes
             if (freeSkill.isValid(player)) {
                 freeSkill.execute();
             }
