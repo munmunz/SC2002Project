@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import java.util.ArrayList;
 
 public class Powerstone implements Item {
@@ -48,5 +49,16 @@ public class Powerstone implements Item {
             }
             player.setSkillCooldown(originalCooldown);
         }
+=======
+public class Powerstone extends Item {
+
+    Powerstone() {
+        super("Powerstone");
+    }
+
+    @Override
+    public void use(Player player, Combatant target) {
+        
+>>>>>>> Stashed changes
     }
 }
