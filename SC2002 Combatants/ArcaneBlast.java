@@ -51,3 +51,4 @@ public class ArcaneBlast implements Action {
         ((Player) user).setSkillCooldown(3);
     }
 }
+
