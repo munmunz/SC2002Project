@@ -18,7 +18,7 @@ public class BasicAttack implements Action {
 		int newHp = Math.max(0, target.getHealthPoints() - damage);
 		
 		target.setHealthPoints(newHp);
-		System.out.println(user.getName() + " attacks " + target.getName() + " for " + damage + " damage! ")
+		System.out.println(user.getName() + " attacks " + target.getName() + " for " + damage + " damage! ");
 		System.out.println(target.getName() + " HP: " + newHp + ")");
 		
 	}

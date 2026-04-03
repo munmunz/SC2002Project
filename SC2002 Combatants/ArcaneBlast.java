@@ -22,19 +22,21 @@ public class ArcaneBlast implements Action {
         
      // At least one enemy must be alive
       for (int i = 0; i < enemies.size(); i++) {
-    	  if (e.getHealthPoints()> 0)
+		Combatant enemy = enemies.get(i);
+    	  if (enemy.getHealthPoints()> 0)
     		  return true;
       }
       return false;
 	}
 	
+	
 	public void execute() {
-		int killCount = 0;
+		// int killCount = 0;
 		
 		for (int i = 0; i < enemies.size(); i++) {
 		    Combatant enemy = enemies.get(i);
 			if (enemy.getHealthPoints() <= 0)
-				continue  // if already dead, skip
+				continue;  // if already dead, skip
 				
 			int damage = Math.max(0, user.getAttack() - enemy.getDefense());
             int newHp = Math.max(0, enemy.getHealthPoints() - damage);
@@ -43,17 +45,21 @@ public class ArcaneBlast implements Action {
                     + " for " + damage + " damage! (HP: " + newHp + ")");
 		
             if (newHp == 0) {
-            	killCount ++ 
-            	System.out.println(enemy.getName() + " was defeated by Arcane Blast!")
+            	// killCount ++;
+            	System.out.println(enemy.getName() + " was defeated by Arcane Blast!");
         
             }
 		}
 		
+		// the effect for calling arcaneblaststaus e.g +damage after killing each enemy 
+		/*
 		if (killCount > 0) {
 		    ArcaneBlastStatus arcaneStatus = new ArcaneBlastStatus(user, killCount);
 		    user.applyStatus(arcaneStatus);
 		}
-		
+		 */
+
+
 		  // Set cooldown (3 turns including current)
         ((Player) user).setSkillCooldown(3);
        

@@ -34,11 +34,13 @@ public class ShieldBash implements Action {
         System.out.println(user.getName() + " uses Shield Bash on " + target.getName()
         + " for " + damage + " damage!");
         
+		/* 
         // Apply Stun if target is still alive
         if (newHp > 0) {
         	Stun stun = new Stun(target);
         	target.applyStatus(stun);
         }
+			*/
         
         
         // Set cooldown (3 turns including current)
@@ -46,3 +48,5 @@ public class ShieldBash implements Action {
         
         
 }
+}
+
