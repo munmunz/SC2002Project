@@ -1,64 +1,39 @@
-<<<<<<< Updated upstream
-import java.util.ArrayList;
+public class ShieldBash implements Action {
+    private Combatant user;
+    private Combatant target;
 
-public class Powerstone implements Item {
-    private final String type;
-
-    Powerstone() {
-        this.type = "Power Stone";
+    public ShieldBash(Combatant user, Combatant target) {
+        this.user = user;
+        this.target = target;
     }
 
-    @Override
-    public String getType() {
-        return type;
-    }
-
-    @Override
-<<<<<<< Updated upstream
-    public void use(Player player, Combatant target, ArrayList<Combatant> enemies) {
-=======
-    public void use(Player player, Combatant target) {
->>>>>>> Stashed changes
-        int originalCooldown = player.getSkillCooldown();
-
-        if (player instanceof Warrior) {
-            player.setSkillCooldown(0);
-            Action freeSkill = new ShieldBash(player, target);
-            if (freeSkill.isValid(player)) {
-                freeSkill.execute();
-            }
-            player.setSkillCooldown(originalCooldown);
-            return;
+    public boolean isValid(Combatant user) {
+        if (!(user instanceof Player)) {
+            return false;
         }
 
-        if (player instanceof Wizard) {
-<<<<<<< Updated upstream
-            player.setSkillCooldown(0);
-            Action freeSkill = new ArcaneBlast(player, enemies);
-=======
-            ArrayList<Combatant> singleTargetList = new ArrayList<>();
-            if (target != null) {
-                singleTargetList.add(target);
-            }
+        Player player = (Player) user;
 
-            player.setSkillCooldown(0);
-            Action freeSkill = new ArcaneBlast(player, singleTargetList);
->>>>>>> Stashed changes
-            if (freeSkill.isValid(player)) {
-                freeSkill.execute();
-            }
-            player.setSkillCooldown(originalCooldown);
+        if (player.getSkillCooldown() > 0) {
+            System.out.println("ShieldBash is on cooldown! (" + player.getSkillCooldown() + " turns remaining)");
+            return false;
         }
-=======
-public class Powerstone extends Item {
 
-    Powerstone() {
-        super("Powerstone");
+        return target != null && target.getHealthPoints() > 0;
     }
 
-    @Override
-    public void use(Player player, Combatant target) {
-        
->>>>>>> Stashed changes
+    public void execute() {
+        int damage = Math.max(0, user.getAttack() - target.getDefense());
+        int newHp = Math.max(0, target.getHealthPoints() - damage);
+        target.setHealthPoints(newHp);
+        System.out.println(user.getName() + " uses Shield Bash on " + target.getName()
+                + " for " + damage + " damage!");
+
+        if (newHp > 0) {
+            // Stun status will be applied once the concrete status class exists.
+        }
+
+        ((Player) user).setSkillCooldown(3);
     }
 }
+
