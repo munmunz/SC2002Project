@@ -10,7 +10,12 @@ public abstract class Combatant{
     private ArrayList<Action> actions;
     private int movesAvailable;
     private int maxHealthPoints;
-    
+
+    // Status effect flags
+    private boolean stunned;
+    private boolean smokeBombed;
+    private boolean invulnerable;
+
     Combatant(String name, int healthPoints, int attack, int defense, int speed, int movesAvailable, int maxHealthPoints){
         this.name = name;
         this.healthPoints = healthPoints;
@@ -21,6 +26,30 @@ public abstract class Combatant{
         this.movesAvailable = movesAvailable;
         this.actions = new ArrayList<>();
         this.maxHealthPoints = maxHealthPoints;
+        this.stunned = false;
+        this.smokeBombed = false;
+        this.invulnerable = false;
+    }
+    // Status effect getters and setters
+    public boolean isStunned() {
+        return stunned;
+    }
+    public void setStunned(boolean stunned) {
+        this.stunned = stunned;
+    }
+
+    public boolean isSmokeBombed() {
+        return smokeBombed;
+    }
+    public void setSmokeBombed(boolean smokeBombed) {
+        this.smokeBombed = smokeBombed;
+    }
+
+    public boolean isInvulnerable() {
+        return invulnerable;
+    }
+    public void setInvulnerable(boolean invulnerable) {
+        this.invulnerable = invulnerable;
     }
 
     public void applyStatus(Status status){

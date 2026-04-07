@@ -3,9 +3,9 @@ public class DefendStatus extends Status {
     private int bonusDefense;
 
     public DefendStatus(Combatant target) {
-        super("DefendStatus", 1); // 1 turn defend by default
+        super("DefendStatus", 2); // 2 turns: current + next
         this.target = target;
-        this.bonusDefense = 10; // As per sticky note in UML
+        this.bonusDefense = 10;
     }
 
     @Override

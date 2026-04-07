@@ -1,11 +1,11 @@
 public abstract class Status {
     protected String name;
-    protected int cooldown;
+    protected int duration; // Number of turns remaining
     protected boolean applied;
 
-    public Status(String name, int cooldown) {
+    public Status(String name, int duration) {
         this.name = name;
-        this.cooldown = cooldown;
+        this.duration = duration;
         this.applied = false;
     }
 
@@ -13,12 +13,23 @@ public abstract class Status {
         return name;
     }
 
-    public int getCooldown() {
-        return cooldown;
+    public int getDuration() {
+        return duration;
     }
 
     public boolean isApplied() {
         return applied;
+    }
+
+    // Call at the end of each round/turn
+    public void decrementDuration() {
+        if (duration > 0) {
+            duration--;
+        }
+    }
+
+    public boolean isExpired() {
+        return duration <= 0;
     }
 
     public abstract void apply();
