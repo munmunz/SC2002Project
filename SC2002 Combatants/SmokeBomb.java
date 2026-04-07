@@ -1,15 +1,9 @@
 import java.util.ArrayList;
 
-public class SmokeBomb implements Item {
-    private final String type;
+public class SmokeBomb extends Item {
 
     SmokeBomb() {
-        this.type = "Smoke Bomb";
-    }
-
-    @Override
-    public String getType() {
-        return type;
+        super("Smoke Bomb");
     }
 
     @Override
