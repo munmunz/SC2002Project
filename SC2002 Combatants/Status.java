@@ -1,6 +1,6 @@
 public abstract class Status {
     protected String name;
-    protected int duration; // Number of turns remaining
+    protected int duration;
     protected boolean applied;
 
     public Status(String name, int duration) {
@@ -21,15 +21,14 @@ public abstract class Status {
         return applied;
     }
 
-    // Call at the end of each round/turn
+    public boolean isExpired() {
+        return duration <= 0;
+    }
+
     public void decrementDuration() {
         if (duration > 0) {
             duration--;
         }
-    }
-
-    public boolean isExpired() {
-        return duration <= 0;
     }
 
     public abstract void apply();
