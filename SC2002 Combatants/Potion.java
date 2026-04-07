@@ -1,17 +1,11 @@
 import java.util.ArrayList;
 
-public class Potion implements Item {
-    private final String type;
+public class Potion extends Item {
     private final int healAmount;
 
     Potion() {
-        this.type = "Potion";
+        super("Potion");
         this.healAmount = 100;
-    }
-
-    @Override
-    public String getType() {
-        return type;
     }
 
     @Override

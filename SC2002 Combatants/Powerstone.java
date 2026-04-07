@@ -1,15 +1,9 @@
 import java.util.ArrayList;
 
-public class Powerstone implements Item {
-    private final String type;
+public class Powerstone extends Item {
 
     Powerstone() {
-        this.type = "Power Stone";
-    }
-
-    @Override
-    public String getType() {
-        return type;
+        super("Power Stone");
     }
 
     @Override
