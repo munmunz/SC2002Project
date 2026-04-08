@@ -1,18 +1,25 @@
 package actions;
 
 import core.Combatant;
-public class Defend implements Action {
-	private Combatant user;
-	
-	public Defend(Combatant user) {
-		this.user = user;
-	}
+import statuses.DefendStatus;
 
-	public boolean isValid(Combatant user) {
-		return user != null && user.getHealthPoints() > 0;
-	}
-		
-	public void execute() {
-		// Defend status application will be added once the status system exists.
-	}
+public class Defend implements Action {
+    private Combatant user;
+
+    public Defend(Combatant user) {
+        this.user = user;
+    }
+
+    @Override
+    public boolean isValid(Combatant user) {   // return True instead 
+        return true;
+    }
+
+    @Override
+    public void execute() {
+        DefendStatus defendStatus = new DefendStatus(user);
+        user.applyStatus(defendStatus);
+        defendStatus.apply();
+        System.out.println(user.getName() + " takes a defensive stance! (+" + 10 + " Defense)");
+    }
 }
