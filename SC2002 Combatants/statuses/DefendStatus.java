@@ -1,3 +1,6 @@
+package statuses;
+
+import core.Combatant;
 public class DefendStatus extends Status {
     private Combatant target;
     private int bonusDefense;

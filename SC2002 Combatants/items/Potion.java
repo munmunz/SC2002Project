@@ -1,9 +1,11 @@
-import java.util.ArrayList;
+package items;
 
+import java.util.ArrayList;
+import core.Combatant;
+import core.Player;
 public class Potion extends Item {
     private final int healAmount;
-
-    Potion() {
+    public Potion() {
         super("Potion");
         this.healAmount = 100;
     }
@@ -17,4 +19,3 @@ public class Potion extends Item {
         player.setHealthPoints(newHealthPoints);
     }
 }
-

@@ -1,3 +1,7 @@
+package actions;
+
+import core.Combatant;
+import core.Player;
 public class ShieldBash implements Action {
     private Combatant user;
     private Combatant target;

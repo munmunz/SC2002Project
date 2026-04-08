@@ -1,9 +1,12 @@
+package core;
+
 import java.util.ArrayList;
+import items.Item;
 public abstract class Player extends Combatant {
     private ArrayList<Item> items;
     private int skillCooldown;
 
-    Player(String name,int healthPoints,int attack,int defense,int speed,int movesAvailable,int maxHealthPoints, int skillCooldown) {
+    protected Player(String name,int healthPoints,int attack,int defense,int speed,int movesAvailable,int maxHealthPoints, int skillCooldown) {
         super(name, healthPoints, attack, defense, speed, movesAvailable, maxHealthPoints);
         this.items = new ArrayList<>();
         this.skillCooldown = skillCooldown;

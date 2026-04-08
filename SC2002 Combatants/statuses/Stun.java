@@ -1,3 +1,6 @@
+package statuses;
+
+import core.Combatant;
 public class Stun extends Status {
     private Combatant target;
 

@@ -1,8 +1,10 @@
+package items;
+
 import java.util.ArrayList;
-
+import core.Combatant;
+import core.Player;
 public class SmokeBomb extends Item {
-
-    SmokeBomb() {
+    public SmokeBomb() {
         super("Smoke Bomb");
     }
 

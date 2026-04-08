@@ -1,5 +1,9 @@
-import java.util.ArrayList;
+package actions;
 
+import java.util.ArrayList;
+import core.Combatant;
+import core.Player;
+import items.Item;
 public class UseItem implements Action {
 	private Item item;
 	private Player user;   // only Players have items

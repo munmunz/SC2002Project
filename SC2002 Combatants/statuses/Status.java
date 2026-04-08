@@ -1,3 +1,4 @@
+package statuses;
 public abstract class Status {
     protected String name;
     protected int cooldown;
