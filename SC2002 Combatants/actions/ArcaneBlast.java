@@ -1,5 +1,8 @@
-import java.util.ArrayList;
+package actions;
 
+import java.util.ArrayList;
+import core.Combatant;
+import core.Player;
 public class ArcaneBlast implements Action {
     private Combatant user;
     private ArrayList<Combatant> enemies;
@@ -51,4 +54,3 @@ public class ArcaneBlast implements Action {
         ((Player) user).setSkillCooldown(3);
     }
 }
-

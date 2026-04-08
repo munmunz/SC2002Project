@@ -1,3 +1,6 @@
+package actions;
+
+import core.Combatant;
 public class BasicAttack implements Action {
     private Combatant user;
     private Combatant target;

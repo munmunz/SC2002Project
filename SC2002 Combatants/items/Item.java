@@ -1,5 +1,8 @@
-import java.util.ArrayList;
+package items;
 
+import java.util.ArrayList;
+import core.Combatant;
+import core.Player;
 public abstract class Item {
     private final String type;
 

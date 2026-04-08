@@ -1,8 +1,15 @@
+package items;
+
 import java.util.ArrayList;
-
+import actions.Action;
+import actions.ArcaneBlast;
+import actions.ShieldBash;
+import characters.Warrior;
+import characters.Wizard;
+import core.Combatant;
+import core.Player;
 public class Powerstone extends Item {
-
-    Powerstone() {
+    public Powerstone() {
         super("Power Stone");
     }
 
@@ -30,4 +37,3 @@ public class Powerstone extends Item {
         }
     }
 }
-
