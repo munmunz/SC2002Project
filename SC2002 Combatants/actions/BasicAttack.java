@@ -10,8 +10,9 @@ public class BasicAttack implements Action {
         this.target = target;
     }
 
-    public boolean isValid(Combatant user) {
-        return target != null && target.getHealthPoints() > 0;
+    public boolean isValid(Combatant user) { 
+        // return target != null && target.getHealthPoints() > 0;
+        return true;
     }
 
     public void execute() {
