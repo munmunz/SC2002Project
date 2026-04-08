@@ -19,7 +19,6 @@ public class Defend implements Action {
     public void execute() {
         DefendStatus defendStatus = new DefendStatus(user);
         user.applyStatus(defendStatus);
-        defendStatus.apply();
         System.out.println(user.getName() + " takes a defensive stance! (+" + 10 + " Defense)");
     }
 }

@@ -22,6 +22,15 @@ public abstract class Status {
         return applied;
     }
 
+    public void decrementStatus() {
+        if (cooldown > 0) {
+            cooldown--;
+        }
+        if (cooldown == 0 && applied) {
+            remove();
+        }
+    }
+
     public abstract void apply();
     public abstract void remove();
 }
