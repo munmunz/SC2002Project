@@ -1,7 +1,5 @@
 package items;
 
-import java.util.ArrayList;
-import core.Combatant;
 import core.Player;
 public class Potion extends Item {
     private final int healAmount;
@@ -11,11 +9,13 @@ public class Potion extends Item {
     }
 
     @Override
-    public void use(Player player, Combatant target, ArrayList<Combatant> enemies) {
+    public void use(Player player) {
         int newHealthPoints = player.getHealthPoints() + healAmount;
         if (newHealthPoints > player.getMaxHealthPoints()) {
             newHealthPoints = player.getMaxHealthPoints();
         }
         player.setHealthPoints(newHealthPoints);
+
+        used = true;
     }
 }

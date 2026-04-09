@@ -9,6 +9,8 @@ public class SmokeBomb extends Item {
     }
 
     @Override
-    public void use(Player player, Combatant target, ArrayList<Combatant> enemies) {
+    public void use(Player player) {
+        ArrayList<Combatant> enemies = BattleField.getAliveEnemies();
+        used = true;
     }
 }

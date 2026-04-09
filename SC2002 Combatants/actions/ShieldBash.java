@@ -3,15 +3,15 @@ package actions;
 import statuses.Stun;
 import core.Combatant;
 import core.Player;
-public class ShieldBash implements Action {
-	private Combatant user; // should be Warrior
-	private Combatant target;
+import actions.exceptions.*;
 
+public class ShieldBash extends Action implements Targetable{
+	private Combatant target;
 	
-	
-	public ShieldBash(Combatant user, Combatant target) {
-		this.user = user;
-		this.target = target;
+    private static final String NAME = "Shield Bash (Special)";
+	public ShieldBash() {
+		super(NAME);
+		target = null;
 	}
 	
 	public boolean isValid(Combatant user) {
@@ -32,7 +32,15 @@ public class ShieldBash implements Action {
 		
 	}
 	
-	 public void execute() {
+	public void execute() throws MissingTargetException, ActionOnCooldownException{
+		if (((Player) user).getSkillCooldown() > 0){
+			throw new ActionOnCooldownException(((Player) user).getSkillCooldown());
+		}
+
+		if (target == null){
+			throw new MissingTargetException();
+		}
+
         // Deal BasicAttack damage
         int damage = Math.max(0, user.getAttack() - target.getDefense());
         int newHp = Math.max(0, target.getHealthPoints() - damage);
@@ -53,6 +61,15 @@ public class ShieldBash implements Action {
         // Set cooldown (3 turns including current)
         ((Player) user).setSkillCooldown(3);
         
+    }
+
+	public Action copy(){
+        Action copy = new ShieldBash();
+        return copy;
+    }
+
+	public void setTarget(Combatant target){
+        this.target = target;
     }
 }
 
