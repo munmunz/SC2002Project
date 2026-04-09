@@ -4,13 +4,16 @@ import statuses.ArcaneBlastStatus;
 import java.util.ArrayList;
 import core.Combatant;
 import core.Player;
-public class ArcaneBlast implements Action {
-	private Combatant user;   // should be a Wizard 
+import actions.exceptions.ActionOnCooldownException;
+
+
+
+public class ArcaneBlast extends Action {
 	private ArrayList<Combatant> enemies;  // all alive enemies (not sure if implemented yet)
 	
-	public ArcaneBlast(Combatant user, ArrayList<Combatant> enemies) {
-		this.user = user;
-		this.enemies = enemies; 
+    private static final String NAME = "Arcane Blast (Special)";
+	public ArcaneBlast() {
+		super(NAME);
 	}
 	
 	public boolean isValid(Combatant user) {
@@ -33,7 +36,10 @@ public class ArcaneBlast implements Action {
         return false;
     }
 
-    public void execute() {
+    public void execute() throws ActionOnCooldownException{
+		if (((Player) user).getSkillCooldown() > 0){
+			throw new ActionOnCooldownException(((Player) user).getSkillCooldown());
+		}
 
         ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user, 10);
         user.applyStatus(blastStatus);
@@ -62,5 +68,8 @@ public class ArcaneBlast implements Action {
        
 	}
       
-       
+    public Action copy(){
+        Action copy = new ArcaneBlast();
+        return copy;
+    }
 }

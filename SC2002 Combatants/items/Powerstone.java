@@ -35,5 +35,7 @@ public class Powerstone extends Item {
             }
             player.setSkillCooldown(originalCooldown);
         }
+
+        used = true;
     }
 }
