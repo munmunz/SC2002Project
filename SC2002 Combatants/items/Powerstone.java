@@ -19,7 +19,7 @@ public class Powerstone extends Item {
             Action currentAction = iterator.next();
             
             if (currentAction instanceof SpecialAction){
-                action = (SpecialAction) currentAction;
+                action = (SpecialAction) (currentAction.copy());
                 break;
             }
         }
