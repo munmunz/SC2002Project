@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import core.Combatant;
 import core.Player;
 import items.Item;
-public class UseItem extends Action implements Targetable{
+public class UseItem extends Action{
 	private Item item;
-	private Combatant target;
-	private ArrayList<Combatant> enemies;
+	// private Combatant target; // Not needed
+	// private ArrayList<Combatant> enemies;
 
-	private static final String NAME = "Arcane Blast (Special)";
+	private static final String NAME = "Use Item";
 	public UseItem() {
 		super(NAME);
-		this.target = null;
 	}
 	
 	public UseItem(Player user, Item item, Combatant target, ArrayList<Combatant> enemies) {
@@ -21,12 +20,8 @@ public class UseItem extends Action implements Targetable{
 		this.enemies = enemies;
 	}
 	
-	public boolean isValid(Combatant user) {
-		return item != null && ((Player) this.user).getItems().contains(item);
-	}
-	
 	public void execute() {
-		item.use((Player) user, target, enemies);
+		item.use((Player) user);
 
 
 		System.out.println(user.getName() + " used " + item.getType() + "!");
@@ -43,7 +38,4 @@ public class UseItem extends Action implements Targetable{
 		this.item = itemChoice;
 	}
 
-	public void setTarget(Combatant target){
-        this.target = target;
-    }
 }

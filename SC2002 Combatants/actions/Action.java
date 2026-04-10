@@ -6,7 +6,6 @@ public abstract class Action {
     private String name;
     protected Combatant user;
 
-    public abstract boolean isValid(Combatant user);
     public abstract void execute();
     public abstract Action copy();
 
