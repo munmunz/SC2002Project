@@ -12,7 +12,7 @@ public abstract class Combatant{
     private int defense;
     private int speed;
     private ArrayList<Status> status;
-    private ArrayList<Action> actions;
+    protected ArrayList<Action> actions;
     private int movesAvailable;
     private int maxHealthPoints;
     
@@ -96,10 +96,6 @@ public abstract class Combatant{
 
     public ArrayList<Action> getActions() {
         return actions;
-    }
-
-    public void setActions(ArrayList<Action> actions) {
-        this.actions = actions;
     }
 
     public int getMovesAvailable() {

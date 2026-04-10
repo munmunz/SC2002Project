@@ -3,8 +3,7 @@ package core;
 import java.util.ArrayList;
 import items.Item;
 import statuses.Status;
-import actions.Action;
-import actions.SpecialAction;
+import actions.*;
 import java.util.Iterator;
 
 public abstract class Player extends Combatant {
@@ -13,6 +12,10 @@ public abstract class Player extends Combatant {
     protected Player(String name,int healthPoints,int attack,int defense,int speed,int movesAvailable,int maxHealthPoints, int skillCooldown) {
         super(name, healthPoints, attack, defense, speed, movesAvailable, maxHealthPoints);
         this.items = new ArrayList<>();
+
+        this.actions.add(new BasicAttack());
+        this.actions.add(new Defend());
+        this.actions.add(new UseItem());
     }
 
     public ArrayList<Item> getItems(){
