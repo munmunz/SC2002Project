@@ -1,7 +1,5 @@
 package actions;
 
-import java.util.ArrayList;
-import core.Combatant;
 import core.Player;
 import items.Item;
 public class UseItem extends Action{
@@ -12,12 +10,6 @@ public class UseItem extends Action{
 	private static final String NAME = "Use Item";
 	public UseItem() {
 		super(NAME);
-	}
-	
-	public UseItem(Player user, Item item, Combatant target, ArrayList<Combatant> enemies) {
-		this.item = item;
-		this.target = target;
-		this.enemies = enemies;
 	}
 	
 	public void execute() {

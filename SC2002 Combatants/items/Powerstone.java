@@ -1,40 +1,32 @@
 package items;
 
-import java.util.ArrayList;
 import actions.Action;
-import actions.ArcaneBlast;
-import actions.ShieldBash;
-import characters.Warrior;
-import characters.Wizard;
-import core.Combatant;
+import actions.SpecialAction;
+import battleengine.PlayerControl;
 import core.Player;
+import java.util.Iterator;
+
 public class Powerstone extends Item {
     public Powerstone() {
         super("Power Stone");
     }
 
-    @Override
-    public void use(Player player, Combatant target, ArrayList<Combatant> enemies) {
-        int originalCooldown = player.getSkillCooldown();
+    public void use(Player player) {
+        SpecialAction action = null;
 
-        if (player instanceof Warrior) {
-            player.setSkillCooldown(0);
-            Action freeSkill = new ShieldBash(player, target);
-            if (freeSkill.isValid(player)) {
-                freeSkill.execute();
+        Iterator<Action> iterator = player.getActions().iterator(); // Search for special skill
+        while (iterator.hasNext()) {
+            Action currentAction = iterator.next();
+            
+            if (currentAction instanceof SpecialAction){
+                action = (SpecialAction) currentAction;
+                break;
             }
-            player.setSkillCooldown(originalCooldown);
-            return;
         }
 
-        if (player instanceof Wizard) {
-            player.setSkillCooldown(0);
-            Action freeSkill = new ArcaneBlast(player, enemies);
-            if (freeSkill.isValid(player)) {
-                freeSkill.execute();
-            }
-            player.setSkillCooldown(originalCooldown);
-        }
+        int originalCooldown = action.getCooldown();
+        PlayerControl.doAction(player, action);
+        action.setCooldown(originalCooldown);
 
         used = true;
     }
