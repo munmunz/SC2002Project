@@ -2,15 +2,15 @@ package actions;
 
 import statuses.ArcaneBlastStatus;
 import java.util.ArrayList;
-import core.Combatant;
+import core.BattleField;
 import core.Player;
+import core.Combatant;
+import core.Enemy;
 import actions.exceptions.ActionOnCooldownException;
 
 
 
 public class ArcaneBlast extends Action {
-	private ArrayList<Combatant> enemies;  // all alive enemies (not sure if implemented yet)
-	
     private static final String NAME = "Arcane Blast (Special)";
 	public ArcaneBlast() {
 		super(NAME);
@@ -20,6 +20,7 @@ public class ArcaneBlast extends Action {
         if (!(user instanceof Player)) 
         	return false;
         Player player = (Player) user;
+        ArrayList<Enemy> enemies = BattleField.getAliveEnemies();
 
         // Cooldown must be 0 (ready)
         if (player.getSkillCooldown() > 0) {
@@ -27,7 +28,7 @@ public class ArcaneBlast extends Action {
             return false;
         }
 
-        for (int i = 0; i < enemies.size(); i++) {  // will update when logic for 'all enemies alive' logic in battle engine?
+        for (int i = 0; i < enemies.size(); i++) {
             Combatant enemy = enemies.get(i);
             if (enemy.getHealthPoints() > 0) {
                 return true;
@@ -40,12 +41,13 @@ public class ArcaneBlast extends Action {
 		if (((Player) user).getSkillCooldown() > 0){
 			throw new ActionOnCooldownException(((Player) user).getSkillCooldown());
 		}
+        ArrayList<Enemy> enemies = BattleField.getAliveEnemies();
 
         ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user, 10);
         user.applyStatus(blastStatus);
 
 
-        for (int i = 0; i < enemies.size(); i++) { // will update when logic for 'all enemies alive' logic in battle engine?
+        for (int i = 0; i < enemies.size(); i++) {
             Combatant enemy = enemies.get(i);
             if (enemy.getHealthPoints() <= 0) {
                 continue;

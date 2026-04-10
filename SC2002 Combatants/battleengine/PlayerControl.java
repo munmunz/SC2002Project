@@ -2,6 +2,7 @@ package battleengine;
 
 import core.Player;
 import core.Enemy;
+import core.BattleField;
 import items.Item;
 import actions.*;
 import actions.exceptions.*;

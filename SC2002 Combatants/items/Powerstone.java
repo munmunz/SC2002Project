@@ -1,35 +1,42 @@
 package items;
 
-import java.util.ArrayList;
-import actions.Action;
 import actions.ArcaneBlast;
 import actions.ShieldBash;
+import core.BattleField;
+import core.Enemy;
 import characters.Warrior;
 import characters.Wizard;
-import core.Combatant;
 import core.Player;
+import ui.PlayerUI;
 public class Powerstone extends Item {
     public Powerstone() {
         super("Power Stone");
     }
 
     @Override
-    public void use(Player player, Combatant target, ArrayList<Combatant> enemies) {
+    public void use(Player player) {
         int originalCooldown = player.getSkillCooldown();
+        player.setSkillCooldown(0);
 
         if (player instanceof Warrior) {
-            player.setSkillCooldown(0);
-            Action freeSkill = new ShieldBash(player, target);
+            ShieldBash freeSkill = new ShieldBash();
+            freeSkill.setUser(player);
+
+            if (BattleField.getAliveEnemies().isEmpty()) {
+                player.setSkillCooldown(originalCooldown);
+                used = true;
+                return;
+            }
+
+            Enemy target = PlayerUI.chooseTarget(BattleField.getAliveEnemies());
+            freeSkill.setTarget(target);
             if (freeSkill.isValid(player)) {
                 freeSkill.execute();
             }
             player.setSkillCooldown(originalCooldown);
-            return;
-        }
-
-        if (player instanceof Wizard) {
-            player.setSkillCooldown(0);
-            Action freeSkill = new ArcaneBlast(player, enemies);
+        } else if (player instanceof Wizard) {
+            ArcaneBlast freeSkill = new ArcaneBlast();
+            freeSkill.setUser(player);
             if (freeSkill.isValid(player)) {
                 freeSkill.execute();
             }
