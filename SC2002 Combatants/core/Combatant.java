@@ -1,5 +1,8 @@
-import java.util.ArrayList;
+package core;
 
+import java.util.ArrayList;
+import actions.Action;
+import statuses.Status;
 public abstract class Combatant{
     private String name;
     private int healthPoints;
@@ -11,7 +14,7 @@ public abstract class Combatant{
     private int movesAvailable;
     private int maxHealthPoints;
     
-    Combatant(String name, int healthPoints, int attack, int defense, int speed, int movesAvailable, int maxHealthPoints){
+    protected Combatant(String name, int healthPoints, int attack, int defense, int speed, int movesAvailable, int maxHealthPoints){
         this.name = name;
         this.healthPoints = healthPoints;
         this.attack = attack;
@@ -38,7 +41,12 @@ public abstract class Combatant{
     }
 
     public void performActions(Action action,Combatant target){
-
+    		if (action.isValid(this)) {
+    			action.execute();
+    		}
+    		else {
+    			System.out.println(getName() + " cannot perform that action!");
+    		}
     }
 
     public String getName(){
