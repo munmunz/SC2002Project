@@ -11,9 +11,6 @@ public class BattleEngine {
         this.sentBackup = false;
     }
 
-    public void startGame() {
-    }
-
     public void runRound() {
     }
 
