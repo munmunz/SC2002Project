@@ -1,25 +1,24 @@
 package statuses;
 
 import core.Combatant;
-public class Stun extends Status {
-    private Combatant target;
 
+public class Stun extends Status {
     public Stun(Combatant target) {
-        super("Stun", 1); // 1 turn stun by default
-        this.target = target;
+        super(target);
+        this.name = "Stun";
+        this.cooldown = 2; // This round and next round
     }
 
     @Override
     public void apply() {
-        // Example: Set movesAvailable to 0 for the turn
-        target.setMovesAvailable(0);
+        // Set movesAvailable to negaive so adding 1 won't allow them to move
+        target.setMovesAvailable(-99);
         applied = true;
     }
 
     @Override
     public void remove() {
-        // Example: Restore movesAvailable (if you track the original value, restore it)
-        // For now, just mark as not applied
+        target.setMovesAvailable(0); // Start of next round will add 1
         applied = false;
     }
 }
