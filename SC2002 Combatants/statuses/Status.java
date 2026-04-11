@@ -1,13 +1,15 @@
 package statuses;
+
+import core.Combatant;
+
 public abstract class Status {
     protected String name;
     protected int cooldown;
     protected boolean applied;
+    protected Combatant target;
 
-    public Status(String name, int cooldown) {
-        this.name = name;
-        this.cooldown = cooldown;
-        this.applied = false;
+    public Status(Combatant target) {
+        this.target = target;
     }
 
     public String getName() {
@@ -26,7 +28,7 @@ public abstract class Status {
         if (cooldown > 0) {
             cooldown--;
         }
-        if (cooldown == 0 && applied) {
+        if (cooldown == 0) {
             remove();
         }
     }
