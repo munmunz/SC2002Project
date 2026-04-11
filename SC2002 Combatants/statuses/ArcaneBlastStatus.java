@@ -7,7 +7,7 @@ public class ArcaneBlastStatus extends Status {
 
     public ArcaneBlastStatus(Combatant target, int bonusDamage) {
         super(target);
-        this.name = "Smoke Bombed";
+        this.name = "Arcane Blast Status";
         this.cooldown = Integer.MAX_VALUE; // Largest possible number of rounds
         this.bonusDamage = 10;
     }
