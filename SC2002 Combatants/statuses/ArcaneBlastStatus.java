@@ -5,7 +5,7 @@ import core.Combatant;
 public class ArcaneBlastStatus extends Status {
     private int bonusDamage;
 
-    public ArcaneBlastStatus(Combatant target, int bonusDamage) {
+    public ArcaneBlastStatus(Combatant target) {
         super(target);
         this.name = "Arcane Blast Status";
         this.cooldown = Integer.MAX_VALUE; // Largest possible number of rounds
