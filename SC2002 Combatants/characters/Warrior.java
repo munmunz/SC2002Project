@@ -1,5 +1,6 @@
 package characters;
 
+import actions.ShieldBash;
 import core.Player;
 public class Warrior extends Player {
     private static final String NAME = "Warrior";
@@ -12,6 +13,7 @@ public class Warrior extends Player {
     private static final int MAX_HEALTH_POINTS = 260;
     public Warrior(){
         super(NAME, BASE_HEALTH_POINTS, BASE_ATK, BASE_DEF, BASE_SPD, DEFAULT_MOVES_AVAILABLE, MAX_HEALTH_POINTS, DEFAULT_SKILL_COOLDOWN);
+        this.actions.add(new ShieldBash());
     }
 
 }

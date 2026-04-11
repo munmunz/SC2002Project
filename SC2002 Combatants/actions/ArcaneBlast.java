@@ -3,42 +3,21 @@ package actions;
 import statuses.ArcaneBlastStatus;
 import java.util.ArrayList;
 import core.Combatant;
-import core.Player;
 import actions.exceptions.ActionOnCooldownException;
 
 
 
-public class ArcaneBlast extends Action {
+public class ArcaneBlast extends SpecialAction{
 	private ArrayList<Combatant> enemies;  // all alive enemies (not sure if implemented yet)
 	
     private static final String NAME = "Arcane Blast (Special)";
 	public ArcaneBlast() {
 		super(NAME);
 	}
-	
-	public boolean isValid(Combatant user) {
-        if (!(user instanceof Player)) 
-        	return false;
-        Player player = (Player) user;
-
-        // Cooldown must be 0 (ready)
-        if (player.getSkillCooldown() > 0) {
-            System.out.println("Arcane Blast is on cooldown! (" + player.getSkillCooldown() + " turns remaining)");
-            return false;
-        }
-
-        for (int i = 0; i < enemies.size(); i++) {  // will update when logic for 'all enemies alive' logic in battle engine?
-            Combatant enemy = enemies.get(i);
-            if (enemy.getHealthPoints() > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public void execute() throws ActionOnCooldownException{
-		if (((Player) user).getSkillCooldown() > 0){
-			throw new ActionOnCooldownException(((Player) user).getSkillCooldown());
+		if (this.cooldown > 0){
+			throw new ActionOnCooldownException(this.cooldown);
 		}
 
         ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user, 10);
@@ -64,12 +43,12 @@ public class ArcaneBlast extends Action {
             }
 		}
 
-        ((Player) user).setSkillCooldown(3);
+        this.cooldown = 3;
        
 	}
       
     public Action copy(){
-        Action copy = new ArcaneBlast();
-        return copy;
+        this.user = null;
+        return this; // Pass by reference
     }
 }

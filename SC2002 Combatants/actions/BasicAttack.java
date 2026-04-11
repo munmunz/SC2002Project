@@ -12,11 +12,6 @@ public class BasicAttack extends Action implements Targetable {
         target = null;
 	}
 
-    public boolean isValid(Combatant user) { 
-        // return target != null && target.getHealthPoints() > 0;
-        return true;
-    }
-
     public void execute() throws MissingTargetException{
         if (target == null){
             throw new MissingTargetException();

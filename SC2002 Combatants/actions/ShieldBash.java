@@ -2,11 +2,11 @@ package actions;
 
 import statuses.Stun;
 import core.Combatant;
-import core.Player;
 import actions.exceptions.*;
 
-public class ShieldBash extends Action implements Targetable{
+public class ShieldBash extends SpecialAction implements Targetable{
 	private Combatant target;
+	private int cooldown;
 	
     private static final String NAME = "Shield Bash (Special)";
 	public ShieldBash() {
@@ -14,27 +14,9 @@ public class ShieldBash extends Action implements Targetable{
 		target = null;
 	}
 	
-	public boolean isValid(Combatant user) {
-		if (!(user instanceof Player))
-			return false;
-		
-		Player player = (Player) user;
-		
-		// Cooldown must be 0 (ready)
-		
-		if (player.getSkillCooldown() > 0) {
-			System.out.println("ShieldBash is on cooldown! (" + player.getSkillCooldown() + " turns remaining)");
-			return false;
-		}
-		
-		// Target must be alive
-		return target != null && target.getHealthPoints() > 0;
-		
-	}
-	
 	public void execute() throws MissingTargetException, ActionOnCooldownException{
-		if (((Player) user).getSkillCooldown() > 0){
-			throw new ActionOnCooldownException(((Player) user).getSkillCooldown());
+		if (this.cooldown > 0){
+			throw new ActionOnCooldownException(this.cooldown);
 		}
 
 		if (target == null){
@@ -59,18 +41,27 @@ public class ShieldBash extends Action implements Targetable{
     
 
         // Set cooldown (3 turns including current)
-        ((Player) user).setSkillCooldown(3);
+        this.cooldown = 3;
         
     }
 
 	public Action copy(){
-        Action copy = new ShieldBash();
-        return copy;
+		this.target = null;
+		this.user = null;
+        return this; // Pass by reference
     }
 
 	public void setTarget(Combatant target){
         this.target = target;
     }
+
+	public int getCooldown(){
+		return this.cooldown;
+	}
+
+	public void setCooldown(int i){
+		this.cooldown = i;
+	}
 }
 
 

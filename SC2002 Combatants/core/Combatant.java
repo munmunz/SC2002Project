@@ -3,6 +3,8 @@ package core;
 import java.util.ArrayList;
 import actions.Action;
 import statuses.Status;
+import java.util.Iterator;
+
 public abstract class Combatant{
     private String name;
     private int healthPoints;
@@ -10,7 +12,7 @@ public abstract class Combatant{
     private int defense;
     private int speed;
     private ArrayList<Status> status;
-    private ArrayList<Action> actions;
+    protected ArrayList<Action> actions;
     private int movesAvailable;
     private int maxHealthPoints;
     
@@ -36,17 +38,20 @@ public abstract class Combatant{
         }
     }
 
-    public void decrementStatus(){
-
-    }
-
-    public void performActions(Action action,Combatant target){
-    		if (action.isValid(this)) {
-    			action.execute();
-    		}
-    		else {
-    			System.out.println(getName() + " cannot perform that action!");
-    		}
+    public void decrement() {
+        Iterator<Status> iterator = this.status.iterator();
+        
+        while (iterator.hasNext()) {
+            Status currentStatus = iterator.next();
+            
+            // This drops the cooldown by 1 and calls currentStatus.remove() if cooldown hits 0
+            currentStatus.decrementStatus(); 
+            
+            // Remove the status object from the ArrayList once its cooldown is 0
+            if (currentStatus.getCooldown() == 0) {
+                iterator.remove();
+            }
+        }
     }
 
     public String getName(){
@@ -91,10 +96,6 @@ public abstract class Combatant{
 
     public ArrayList<Action> getActions() {
         return actions;
-    }
-
-    public void setActions(ArrayList<Action> actions) {
-        this.actions = actions;
     }
 
     public int getMovesAvailable() {

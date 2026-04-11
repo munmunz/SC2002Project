@@ -1,6 +1,5 @@
 package actions;
 
-import core.Combatant;
 import statuses.DefendStatus;
 
 public class Defend extends Action {
@@ -9,11 +8,6 @@ public class Defend extends Action {
 	public Defend() {
 		super(NAME);
 	}
-
-    @Override
-    public boolean isValid(Combatant user) {   // return True instead 
-        return true;
-    }
 
     @Override
     public void execute() {
