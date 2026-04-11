@@ -1,14 +1,15 @@
 package statuses;
 
 import core.Combatant;
+
 public class ArcaneBlastStatus extends Status {
-    private Combatant target;
     private int bonusDamage;
 
     public ArcaneBlastStatus(Combatant target, int bonusDamage) {
-        super("ArcaneBlastStatus", 0);
-        this.target = target;
-        this.bonusDamage = bonusDamage;
+        super(target);
+        this.name = "Smoke Bombed";
+        this.cooldown = Integer.MAX_VALUE; // Largest possible number of rounds
+        this.bonusDamage = 10;
     }
 
     @Override
