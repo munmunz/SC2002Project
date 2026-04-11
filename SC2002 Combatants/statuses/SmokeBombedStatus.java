@@ -2,25 +2,23 @@ package statuses;
 
 import core.Combatant;
 public class SmokeBombedStatus extends Status {
-    private Combatant target;
-    private int attackReduction;
-
+    private int orginalAttack;
     public SmokeBombedStatus(Combatant target) {
-        super("SmokeBombedStatus", 2); // lasts for 2 enemy actions
-        this.target = target;
-        this.attackReduction = 0;
+        super(target);
+        this.name = "Smoke Bombed";
+        this.cooldown = 2; // This round and next round        
     }
 
     @Override
     public void apply() {
-        attackReduction = Math.max(0, target.getAttack());
-        target.setAttack(target.getAttack() - attackReduction);
+        orginalAttack = target.getAttack();
+        target.setAttack(-99999); // Actions account for negative attack, and will instead deal 0 damage
         applied = true;
     }
 
     @Override
     public void remove() {
-        target.setAttack(target.getAttack() + attackReduction);
+        target.setAttack(orginalAttack); // Restore original attack
         applied = false;
     }
 }
