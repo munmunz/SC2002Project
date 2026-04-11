@@ -1,8 +1,11 @@
 package items;
 
-import java.util.ArrayList;
-import core.Combatant;
+import core.BattleField;
+import core.Enemy;
 import core.Player;
+import java.util.ArrayList;
+import statuses.SmokeBombedStatus;
+import statuses.SmokeBombInvulnerability;
 public class SmokeBomb extends Item {
     public SmokeBomb() {
         super("Smoke Bomb");
@@ -10,7 +13,11 @@ public class SmokeBomb extends Item {
 
     @Override
     public void use(Player player) {
-        ArrayList<Combatant> enemies = BattleField.getAliveEnemies();
+        ArrayList<Enemy> enemies = BattleField.getAliveEnemies();
+        for (Enemy enemy : enemies) {
+            enemy.applyStatus(new SmokeBombedStatus(enemy));
+        }
+        player.applyStatus(new SmokeBombInvulnerability(player));
         used = true;
     }
 }

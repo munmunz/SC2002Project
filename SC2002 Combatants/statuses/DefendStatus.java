@@ -3,10 +3,10 @@ package statuses;
 import core.Combatant;
 public class DefendStatus extends Status {
     private Combatant target;
-    private int bonusDefense;
+    private final int bonusDefense;
 
     public DefendStatus(Combatant target) {
-        super("DefendStatus", 1); // 1 turn defend by default
+        super("DefendStatus", 2); // 1 turn defend by default
         this.target = target;
         this.bonusDefense = 10; // As per sticky note in UML
     }
