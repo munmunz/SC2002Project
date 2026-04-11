@@ -7,7 +7,7 @@ public class DefendStatus extends Status {
 
     public DefendStatus(Combatant target) {
         super(target);
-        this.name = "Defending";
+        this.name = "Defend Status";
         this.cooldown = 2; // This round and next round
         this.bonusDefense = 10; // As per defend ability
     }
