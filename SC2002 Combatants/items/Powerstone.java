@@ -2,10 +2,10 @@ package items;
 
 import actions.ArcaneBlast;
 import actions.ShieldBash;
-import core.BattleField;
-import core.Enemy;
 import characters.Warrior;
 import characters.Wizard;
+import core.BattleField;
+import core.Enemy;
 import core.Player;
 import ui.PlayerUI;
 public class Powerstone extends Item {
@@ -26,7 +26,7 @@ public class Powerstone extends Item {
                 player.setSkillCooldown(originalCooldown);
                 used = true;
                 return;
-            }
+            } // not quite sure about this part, if no enemies, can powerstone be used?
 
             Enemy target = PlayerUI.chooseTarget(BattleField.getAliveEnemies());
             freeSkill.setTarget(target);

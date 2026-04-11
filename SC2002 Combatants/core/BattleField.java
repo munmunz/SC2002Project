@@ -3,7 +3,7 @@ package core;
 import java.util.ArrayList;
 
 public class BattleField {
-    private static ArrayList<Enemy> enemies = new ArrayList<>();
+    private static ArrayList<Enemy> enemies = new ArrayList<>(); // now it is still empty, might need to use getInitialEnemies...
     private static Player player;
 
     public static ArrayList<Enemy> getAliveEnemies() {

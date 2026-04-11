@@ -3,7 +3,6 @@ package items;
 import core.BattleField;
 import core.Enemy;
 import core.Player;
-import statuses.SmokeBombInvulnerability;
 import statuses.SmokeBombedStatus;
 public class SmokeBomb extends Item {
     public SmokeBomb() {
@@ -15,8 +14,5 @@ public class SmokeBomb extends Item {
         for (Enemy enemy : BattleField.getAliveEnemies()) {
             enemy.applyStatus(new SmokeBombedStatus(enemy));
         }
-
-        player.applyStatus(new SmokeBombInvulnerability(player));
-        used = true;
     }
 }
