@@ -43,7 +43,7 @@ public class ArcaneBlast extends SpecialAction{
 		}
 
         if (killedEnemy) {
-            ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user, 10);
+            ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user);
             user.applyStatus(blastStatus);
         }
 
