@@ -9,8 +9,8 @@ import java.util.Iterator;
 public abstract class Player extends Combatant {
     private ArrayList<Item> items;
 
-    protected Player(String name,int healthPoints,int attack,int defense,int speed,int movesAvailable,int maxHealthPoints, int skillCooldown) {
-        super(name, healthPoints, attack, defense, speed, movesAvailable, maxHealthPoints);
+    protected Player(String name,int healthPoints,int attack,int defense,int speed, int maxHealthPoints, int skillCooldown) {
+        super(name, healthPoints, attack, defense, speed, maxHealthPoints);
         this.items = new ArrayList<>();
 
         this.actions.add(new BasicAttack());
@@ -38,7 +38,7 @@ public abstract class Player extends Combatant {
         }
 
         Iterator<Action> iterator2 = this.getActions().iterator(); // Decrement special skill cooldown
-        while (iterator.hasNext()) {
+        while (iterator2.hasNext()) {
             Action currentAction = iterator2.next();
             
             if (currentAction instanceof SpecialAction){

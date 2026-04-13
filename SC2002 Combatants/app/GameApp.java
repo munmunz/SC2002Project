@@ -10,6 +10,8 @@ import java.util.List;
 
 import characters.*;
 
+import battleengine.BattleEngine;
+
 public class GameApp {
 
 

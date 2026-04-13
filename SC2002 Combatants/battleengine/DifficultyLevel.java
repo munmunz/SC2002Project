@@ -19,7 +19,7 @@ public class DifficultyLevel {
      * waveIndex  is the current wave number (0 = Initial Spawn, 1 = First Backup, etc.).
      * return an ArrayList of Enemies for that wave. Returns an empty list if no more waves exist.
      */
-    public ArrayList<Enemy> getWave(int difficulty, int waveIndex) {
+    public static ArrayList<Enemy> getWave(int difficulty, int waveIndex) {
         ArrayList<Enemy> enemies = new ArrayList<>();
 
         switch (difficulty) {

@@ -8,7 +8,6 @@ import actions.exceptions.MissingTargetException;
 import actions.exceptions.ActionOnCooldownException;
 import core.BattleField;
 import ui.PlayerUI;
-import core.BattleField;
 
 public class PlayerControl {
     public static void getPlayerMove(Player player){
@@ -45,6 +44,5 @@ public class PlayerControl {
             }
 
         }
-        return false;
     }
 }

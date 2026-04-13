@@ -16,14 +16,14 @@ public abstract class Combatant{
     private int movesAvailable;
     private int maxHealthPoints;
     
-    protected Combatant(String name, int healthPoints, int attack, int defense, int speed, int movesAvailable, int maxHealthPoints){
+    protected Combatant(String name, int healthPoints, int attack, int defense, int speed, int maxHealthPoints){
         this.name = name;
         this.healthPoints = healthPoints;
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
         this.status = new ArrayList<>();
-        this.movesAvailable = movesAvailable;
+        this.movesAvailable = 0;
         this.actions = new ArrayList<>();
         this.maxHealthPoints = maxHealthPoints;
     }

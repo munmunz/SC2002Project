@@ -21,7 +21,6 @@ public class PlayerUI {
             int choice = sc.nextInt();        
             
             if (1 <= choice && choice <= length){
-                sc.close();
                 return (actions.get(choice - 1)).copy();
             }
             else continue;
@@ -43,7 +42,6 @@ public class PlayerUI {
             int choice = sc.nextInt();        
             
             if (1 <= choice && choice <= length){
-                sc.close();
                 return enemies.get(choice - 1);
             }
             else continue;
@@ -66,7 +64,6 @@ public class PlayerUI {
             
             if (1 <= choice && choice <= length){
                 if (items.get(choice - 1).isUsed() == false){
-                    sc.close();
                     return items.get(choice - 1);
                 }
                 else{
