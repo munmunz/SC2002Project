@@ -20,7 +20,7 @@ public class ArcaneBlast extends SpecialAction{
 			throw new ActionOnCooldownException(this.cooldown);
 		}
 
-        ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user, 10);
+        ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user);
         user.applyStatus(blastStatus);
 
 

@@ -1,14 +1,15 @@
 package statuses;
 
 import core.Combatant;
+
 public class DefendStatus extends Status {
-    private Combatant target;
-    private final int bonusDefense;
+    private int bonusDefense;
 
     public DefendStatus(Combatant target) {
-        super("DefendStatus", 2); // 1 turn defend by default
-        this.target = target;
-        this.bonusDefense = 10; // As per sticky note in UML
+        super(target);
+        this.name = "Defend Status";
+        this.cooldown = 2; // This round and next round
+        this.bonusDefense = 10; // As per defend ability
     }
 
     @Override
