@@ -7,7 +7,7 @@ import core.Combatant;
 public class TurnOrderStrategy {
 
     public static ArrayList<Combatant> roundOrder(ArrayList<Combatant> combatants) {
-        combatants.sort(Comparator.comparing(c -> c.getSpeed()));
+        combatants.sort(Comparator.comparing(c -> c.getSpeed()).reversed());
         return combatants;
 
     }
