@@ -1,9 +1,9 @@
 package actions;
 
-import statuses.ArcaneBlastStatus;
-import java.util.ArrayList;
-import core.Combatant;
 import actions.exceptions.ActionOnCooldownException;
+import core.Combatant;
+import java.util.ArrayList;
+import statuses.ArcaneBlastStatus;
 
 
 
@@ -19,9 +19,7 @@ public class ArcaneBlast extends SpecialAction{
 		if (this.cooldown > 0){
 			throw new ActionOnCooldownException(this.cooldown);
 		}
-
-        ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user);
-        user.applyStatus(blastStatus);
+        boolean killedEnemy = false;
 
 
         for (int i = 0; i < enemies.size(); i++) { // will update when logic for 'all enemies alive' logic in battle engine?
@@ -38,10 +36,16 @@ public class ArcaneBlast extends SpecialAction{
 		
             if (newHp == 0) {
             	// killCount ++;
+                killedEnemy = true;
             	System.out.println(enemy.getName() + " was defeated by Arcane Blast!");
         
             }
 		}
+
+        if (killedEnemy) {
+            ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user, 10);
+            user.applyStatus(blastStatus);
+        }
 
         this.cooldown = 3;
        
