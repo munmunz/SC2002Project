@@ -41,7 +41,17 @@ public class BattleEngine {
         }
 
         for (Combatant combatant : turnOrder){
+            if (combatant.getHealthPoints() <= 0) {
+                combatant.setMovesAvailable(0);
+                continue;
+            }
+
             while (combatant.getMovesAvailable() > 0){
+                if (combatant.getHealthPoints() <= 0) {
+                    combatant.setMovesAvailable(0);
+                    break;
+                }
+
                 if (combatant instanceof Player){
                     PlayerControl.getPlayerMove((Player) combatant);
                     System.out.println("Press Enter to continue...");
