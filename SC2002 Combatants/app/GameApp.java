@@ -8,9 +8,8 @@ import items.*;
 // import java.util.ArrayList;
 import java.util.List;
 
-import characters.*;
-
 import battleengine.BattleEngine;
+import characters.*;
 
 public class GameApp {
 
@@ -68,10 +67,13 @@ private static List<Item> ListofItems = List.of(new Potion(), new Powerstone(), 
         player.setItems(InitiationUI.getItems(ListofItems));
         int difficulty = InitiationUI.getDifficulty();
 
+        InitiationUI.showLoadingScreen(player, player.getItems(), difficulty);
+
         // create BattleEngine , pass in difficulty level
 
+        BattleEngine BE = new BattleEngine(difficulty);
+        BE.StartGame(player);
 
-        InitiationUI.showLoadingScreen(player, player.getItems(), difficulty);
 
     }
 }
