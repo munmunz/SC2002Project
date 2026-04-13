@@ -1,39 +1,52 @@
 package ui;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+// import actions.BasicAttack;
+import core.Enemy;
 import core.Player;
-import characters.Warrior;
-import characters.Wizard;
+// import characters.*;
 import items.Item;
-import items.Potion;
-import items.Powerstone;
-import items.SmokeBomb;
+// import items.*;
+import actions.*;
+
 
 public class InitiationUI {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void ListPlayers() {
-        System.out.println("Players:");
-        System.out.println("  1. Warrior");
-        System.out.println("  2. Wizard");
+    public static void ListPlayers(List<Player> ListofPlayableCharacters) {
+      System.out.println("=== Players ===");
+        for (Player player : ListofPlayableCharacters) {
+            System.out.println("  - " + player.getName());
+        }
+        System.out.println();
     }
 
-    public static void ListPlayerAttributes() {
-        System.out.println("=== Warrior ===");
-        System.out.println("  HP: 260 | Attack: 40 | Defense: 20 | Speed: 30");
-        System.out.println("  Special Skill - Shield Bash:");
-        System.out.println("    Deal BasicAttack damage to selected enemy.");
-        System.out.println("    Selected enemy cannot act this turn and the next.\n");
 
-        System.out.println("=== Wizard ===");
-        System.out.println("  HP: 200 | Attack: 50 | Defense: 10 | Speed: 20");
-        System.out.println("  Special Skill - Arcane Blast:");
-        System.out.println("    Deal BasicAttack damage to ALL enemies in combat.");
-        System.out.println("    Each enemy defeated by Arcane Blast adds +10 Attack");
-        System.out.println("    to the Wizard, lasting until end of the level.");
+    public static void ListPlayerAttributes(List<Player> ListofPlayableCharacters) {
+    for (Player player : ListofPlayableCharacters) {
+        System.out.println("=== " + player.getName() + " ===");
+        System.out.println("  HP: " + player.getHealthPoints() + 
+                           " | Attack: " + player.getAttack() + 
+                           " | Defense: " + player.getDefense() + 
+                           " | Speed: " + player.getSpeed());
+
+        System.out.println("  Special Skill(s):");
+        
+        for (Action action : player.getActions()) {
+            if (action instanceof SpecialAction) {
+                SpecialAction special = (SpecialAction) action;
+                System.out.println("    - " + special.getName());
+            }
+        }
+
+        System.out.println();
     }
+}
+
 
     public static void ListDifficulty() {
         System.out.println("Difficulty Levels:");
@@ -49,60 +62,70 @@ public class InitiationUI {
         System.out.println("  Level 3 - Hard  : Initial Spawn: 2 Goblins         | Backup Spawn: 1 Goblin, 2 Wolves");
     }
 
-    public static void ListEnemies() {
-        System.out.println("Enemies:");
-        System.out.println("  1. Goblin");
-        System.out.println("  2. Wolf");
+    public static void ListEnemies(List<Enemy> ListofEnemies) {
+    System.out.println("=== Enemies ===");
+    for (Enemy enemy : ListofEnemies) {
+        System.out.println("  - " + enemy.getName());
     }
+    System.out.println();
+}
 
-    public static void ListEnemyAttributes() {
-        System.out.println("=== Goblin ===");
-        System.out.println("  HP: 55 | Attack: 35 | Defense: 15 | Speed: 25\n");
+    public static void ListEnemyAttributes(List<Enemy> ListofEnemies) {
+        for (Enemy enemy : ListofEnemies) {
+            System.out.println("=== " + enemy.getName() + " ===");
+            System.out.println("  HP: " + enemy.getHealthPoints() +
+                            " | Attack: " + enemy.getAttack() +
+                            " | Defense: " + enemy.getDefense() +
+                            " | Speed: " + enemy.getSpeed());
 
-        System.out.println("=== Wolf ===");
-        System.out.println("  HP: 40 | Attack: 45 | Defense: 5  | Speed: 35");
-    }
-
-    public static Player getCharacter() {
+            System.out.println("Action(s):");
+            System.out.println("  Action(s):");
+            for (Action action : enemy.getActions()) {
+                System.out.println("    - " + action.getName());
+            }
+            System.out.println();
+        }
+}
+    public static Player getCharacter(List<Player> listOfPlayableCharacters) {
         System.out.println("Choose your character:");
-        System.out.println("  1. Warrior");
-        System.out.println("  2. Wizard");
+
+        for (int i = 0; i < listOfPlayableCharacters.size(); i++) {
+            System.out.println("  " + (i + 1) + ". " + listOfPlayableCharacters.get(i).getName());
+        }
+
         System.out.print("Please enter input: ");
+        int choice = readInt(1, listOfPlayableCharacters.size());
 
-        int choice = readInt(1, 2);
-        switch (choice) {
-            case 1:
-                System.out.println("You chose: Warrior\n");
-                return new Warrior();
-            case 2:
-                System.out.println("You chose: Wizard\n");
-                return new Wizard();
-            default:
-                return new Warrior();
-        }
+        Player chosen = listOfPlayableCharacters.get(choice - 1);
+        System.out.println("You chose: " + chosen.getName() + "\n");
+        return chosen;
+}
+
+
+// private static List<Item> ListofItems = List.of(new Potion(), new Powerstone(), new SmokeBomb()); for reference 
+
+    public static ArrayList<Item> getItems(List<Item> listOfItems) {
+    ArrayList<Item> chosenItems = new ArrayList<>();
+
+    System.out.println("Available items:");
+    for (int i = 0; i < listOfItems.size(); i++) {
+        Item item = listOfItems.get(i);
+        System.out.println("  " + (i + 1) + ". " + item.getType());  // leave out item descriptions 
+    }
+    System.out.println("You may pick 2 items (duplicates allowed).\n");
+
+    for (int i = 1; i <= 2; i++) {
+        System.out.print("Choose item " + i + ": ");
+        int choice = readInt(1, listOfItems.size());
+
+        Item chosen = listOfItems.get(choice - 1);
+        chosenItems.add(chosen);
+        System.out.println("  Added: " + chosen.getType() + "\n");
     }
 
-    public static ArrayList<Item> getItems(Player player) {
-        ArrayList<Item> chosenItems = new ArrayList<>();
-        String[] itemNames = { "Potion", "Power Stone", "Smoke Bomb" };
+    return chosenItems;
+}
 
-        System.out.println("Available items:");
-        System.out.println("  1. Potion      - Heal 100 HP (capped at max HP)");
-        System.out.println("  2. Power Stone - Trigger your special skill once for free");
-        System.out.println("  3. Smoke Bomb  - Enemy attacks deal 0 damage this turn and next");
-        System.out.println("You may pick 2 items (duplicates allowed).\n");
-
-        for (int i = 1; i <= 2; i++) {
-            System.out.print("Choose item " + i + ": ");
-            int choice = readInt(1, 3);
-
-            Item item = createItem(choice, player);
-            chosenItems.add(item);
-            System.out.println("  Added: " + itemNames[choice - 1] + "\n");
-        }
-
-        return chosenItems;
-    }
 
     public static int getDifficulty() {
         System.out.println("Choose difficulty:");
@@ -192,18 +215,6 @@ public class InitiationUI {
         System.out.println("============================================\n");
     }
 
-    private static Item createItem(int choice, Player player) {
-        switch (choice) {
-            case 1:
-                return new Potion();
-            case 2:
-                return new Powerstone();
-            case 3:
-                return new SmokeBomb();
-            default:
-                return new Potion();
-        }
-    }
 
     private static int readInt(int min, int max) {
         while (true) {
