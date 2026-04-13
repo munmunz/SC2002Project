@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 public class GameApp {
 
-// test
+private ArrayList<cplayers> listOfPlayableCharacters;
+// players, enemies, items (call into UI) 
+
     
     public static void main(String[] args) {
 
