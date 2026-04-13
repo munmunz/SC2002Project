@@ -14,13 +14,13 @@ public class BattleEngine {
 
     public BattleEngine(int difficulty) {
         this.roundNumber = 1;
-        currentWaveIndex = 1;
+        currentWaveIndex = 0;
         this.difficulty = difficulty;
     }
 
     public void StartGame(Player player){
         BattleField.setPlayer(player);
-        BattleField.setEnemies(DifficultyLevel.getWave(this.difficulty, 1));
+        BattleField.setEnemies(DifficultyLevel.getWave(this.difficulty, 0));
 
         while (true) {
             runRound();
