@@ -38,7 +38,7 @@ public abstract class Player extends Combatant {
         }
 
         Iterator<Action> iterator2 = this.getActions().iterator(); // Decrement special skill cooldown
-        while (iterator.hasNext()) {
+        while (iterator2.hasNext()) {
             Action currentAction = iterator2.next();
             
             if (currentAction instanceof SpecialAction){
