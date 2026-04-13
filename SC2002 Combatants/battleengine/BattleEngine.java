@@ -18,7 +18,7 @@ public class BattleEngine {
         this.difficulty = difficulty;
     }
 
-    public void StartGame(Player player, int difficulty){
+    public void StartGame(Player player){
         BattleField.setPlayer(player);
         BattleField.setEnemies(DifficultyLevel.getWave(this.difficulty, 1));
 
