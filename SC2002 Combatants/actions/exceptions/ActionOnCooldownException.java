@@ -6,6 +6,6 @@ public class ActionOnCooldownException extends RuntimeException {
     }
 
     public ActionOnCooldownException(int duration) {
-        super("Action on cooldown for " + duration + "more rounds!");
+        super("Action on cooldown for " + duration + " more rounds!");
     }
 }

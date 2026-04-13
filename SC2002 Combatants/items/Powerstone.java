@@ -24,9 +24,12 @@ public class Powerstone extends Item {
             }
         }
 
+        action.setUser(player);
+
         int originalCooldown = action.getCooldown();
+        action.setCooldown(0); // Set Cooldown to 0
         PlayerControl.doAction(player, action);
-        action.setCooldown(originalCooldown);
+        action.setCooldown(originalCooldown); // Restore cooldown to original value
 
         used = true;
     }

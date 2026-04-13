@@ -5,6 +5,8 @@ import core.Player;
 import items.Item;
 import java.util.ArrayList;
 
+import battleengine.BattleEngine;
+
 public class GameApp {
 
     public static void main(String[] args) {
@@ -46,11 +48,12 @@ public class GameApp {
 
     private static void startGame() {
         Player player = InitiationUI.getCharacter();
-        ArrayList<Item> items = InitiationUI.getItems(player);
+        player.setItems(InitiationUI.getItems(player));
         int difficulty = InitiationUI.getDifficulty();
 
-        InitiationUI.showLoadingScreen(player, items, difficulty);
+        InitiationUI.showLoadingScreen(player, player.getItems(), difficulty);
 
-        // incomplete
+        BattleEngine BE = new BattleEngine(difficulty);
+        BE.StartGame(player);
     }
 }

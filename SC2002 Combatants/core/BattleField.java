@@ -44,4 +44,8 @@ public class BattleField {
         aliveCombatants.addAll(getAliveEnemies());
         return aliveCombatants;
     }
+
+    public static Player getPlayer(){
+        return player;
+    }
 }

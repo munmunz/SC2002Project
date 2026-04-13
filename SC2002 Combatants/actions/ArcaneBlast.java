@@ -1,15 +1,14 @@
 package actions;
 
 import actions.exceptions.ActionOnCooldownException;
+import core.BattleField;
 import core.Combatant;
-import java.util.ArrayList;
+import core.Enemy;
 import statuses.ArcaneBlastStatus;
 
 
 
 public class ArcaneBlast extends SpecialAction{
-	private ArrayList<Combatant> enemies;  // all alive enemies (not sure if implemented yet)
-	
     private static final String NAME = "Arcane Blast (Special)";
 	public ArcaneBlast() {
 		super(NAME);
@@ -22,12 +21,7 @@ public class ArcaneBlast extends SpecialAction{
         boolean killedEnemy = false;
 
 
-        for (int i = 0; i < enemies.size(); i++) { // will update when logic for 'all enemies alive' logic in battle engine?
-            Combatant enemy = enemies.get(i);
-            if (enemy.getHealthPoints() <= 0) {
-                continue;
-            }
-
+        for (Enemy enemy : BattleField.getAliveEnemies()) {
             int damage = Math.max(0, user.getAttack() - enemy.getDefense());
             int newHp = Math.max(0, enemy.getHealthPoints() - damage);
             enemy.setHealthPoints(newHp);
@@ -43,7 +37,7 @@ public class ArcaneBlast extends SpecialAction{
 		}
 
         if (killedEnemy) {
-            ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user, 10);
+            ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user);
             user.applyStatus(blastStatus);
         }
 
