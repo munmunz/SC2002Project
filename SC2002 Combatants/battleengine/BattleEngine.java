@@ -25,6 +25,10 @@ public class BattleEngine {
         while (true) {
             runRound();
             roundNumber +=1;
+
+            for (Combatant combatant : BattleField.getAliveCombatants()){
+            combatant.decrement(); // Decrement cooldown and status
+            }
         }
     }
 
