@@ -1,5 +1,5 @@
 package battleengine;
-// test
+import java.util.Comparator;
 import java.util.ArrayList;
 
 import core.Combatant;
@@ -7,7 +7,7 @@ import core.Combatant;
 public class TurnOrderStrategy {
 
     public ArrayList<Combatant> roundOrder(ArrayList<Combatant> combatants) {
-        combatants.sort(Comparators.comparing(combatants -> combatants.getSpeed()))
+        combatants.sort(Comparator.comparing(c -> c.getSpeed()))
         return combatants;
 
     }
