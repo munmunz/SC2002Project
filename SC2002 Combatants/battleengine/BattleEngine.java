@@ -1,13 +1,14 @@
 package battleengine;
 
-import java.util.ArrayList;
-
 import core.BattleField;
 import core.Combatant;
 import core.Enemy;
 import core.Player;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BattleEngine {
+    private static final Scanner scanner = new Scanner(System.in);
     private int roundNumber;
     private int difficulty;
     private int currentWaveIndex;
@@ -40,12 +41,26 @@ public class BattleEngine {
         }
 
         for (Combatant combatant : turnOrder){
+            if (combatant.getHealthPoints() <= 0) {
+                combatant.setMovesAvailable(0);
+                continue;
+            }
+
             while (combatant.getMovesAvailable() > 0){
+                if (combatant.getHealthPoints() <= 0) {
+                    combatant.setMovesAvailable(0);
+                    break;
+                }
+
                 if (combatant instanceof Player){
                     PlayerControl.getPlayerMove((Player) combatant);
+                    System.out.println("Press Enter to continue...");
+                    scanner.nextLine();
                 }
                 else if (combatant instanceof Enemy){
                     EnemyControl.getEnemyMove((Enemy) combatant);
+                    System.out.println("Press Enter to continue...");
+                    scanner.nextLine();
                 }
 
                 combatant.setMovesAvailable(combatant.getMovesAvailable() - 1);
