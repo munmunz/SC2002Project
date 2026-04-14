@@ -20,4 +20,8 @@ public class SmokeBomb extends Item {
         player.applyStatus(new SmokeBombInvulnerability(player));
         used = true;
     }
+
+    public Item copy(){
+        return new SmokeBomb();
+    }
 }

@@ -18,4 +18,8 @@ public class Potion extends Item {
 
         used = true;
     }
+
+    public Item copy(){
+        return new Potion();
+    }
 }

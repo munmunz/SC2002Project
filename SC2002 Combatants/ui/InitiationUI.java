@@ -45,7 +45,7 @@ public class InitiationUI {
 
         System.out.println();
     }
-}
+    }
 
 
     public static void ListDifficulty() {
@@ -68,7 +68,7 @@ public class InitiationUI {
         System.out.println("  - " + enemy.getName());
     }
     System.out.println();
-}
+    }
 
     public static void ListEnemyAttributes(List<Enemy> ListofEnemies) {
         for (Enemy enemy : ListofEnemies) {
@@ -85,7 +85,8 @@ public class InitiationUI {
             }
             System.out.println();
         }
-}
+    }
+
     public static Player getCharacter(List<Player> listOfPlayableCharacters) {
         System.out.println("Choose your character:");
 
@@ -99,10 +100,10 @@ public class InitiationUI {
         Player chosen = listOfPlayableCharacters.get(choice - 1);
         System.out.println("You chose: " + chosen.getName() + "\n");
         return chosen;
-}
+    }
 
 
-// private static List<Item> ListofItems = List.of(new Potion(), new Powerstone(), new SmokeBomb()); for reference 
+    // private static List<Item> ListofItems = List.of(new Potion(), new Powerstone(), new SmokeBomb()); for reference 
 
     public static ArrayList<Item> getItems(List<Item> listOfItems) {
     ArrayList<Item> chosenItems = new ArrayList<>();
@@ -118,13 +119,13 @@ public class InitiationUI {
         System.out.print("Choose item " + i + ": ");
         int choice = readInt(1, listOfItems.size());
 
-        Item chosen = listOfItems.get(choice - 1);
+        Item chosen = (listOfItems.get(choice - 1)).copy();
         chosenItems.add(chosen);
         System.out.println("  Added: " + chosen.getType() + "\n");
     }
 
     return chosenItems;
-}
+    }
 
 
     public static int getDifficulty() {
