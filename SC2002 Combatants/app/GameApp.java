@@ -1,14 +1,30 @@
 package app;
 
 import ui.InitiationUI;
+import core.Enemy;
 import core.Player;
-import items.Item;
-import java.util.ArrayList;
+import items.*;
+
+// import java.util.ArrayList;
+import java.util.List;
 
 import battleengine.BattleEngine;
+import characters.*;
 
 public class GameApp {
 
+
+private static List<Player> ListofPlayableCharacters = List.of(new Warrior(), new Wizard()); 
+
+private static List<Enemy> ListofEnemies = List.of(new Wolf(), new Goblin());
+
+private static List<Item> ListofItems = List.of(new Potion(), new Powerstone(), new SmokeBomb());
+
+
+
+// players, enemies, items (call into UI) 
+
+    
     public static void main(String[] args) {
 
         boolean running = true;
@@ -19,10 +35,10 @@ public class GameApp {
 
             switch (menuChoice) {
                 case 1:
-                    InitiationUI.ListPlayers();
+                    InitiationUI.ListPlayers(ListofPlayableCharacters);
                     break;
                 case 2:
-                    InitiationUI.ListPlayerAttributes();
+                    InitiationUI.ListPlayerAttributes(ListofPlayableCharacters);
                     break;
                 case 3:
                     InitiationUI.ListDifficulty();
@@ -31,10 +47,10 @@ public class GameApp {
                     InitiationUI.ListCombatantsDifficulty();
                     break;
                 case 5:
-                    InitiationUI.ListEnemies();
+                    InitiationUI.ListEnemies(ListofEnemies);
                     break;
                 case 6:
-                    InitiationUI.ListEnemyAttributes();
+                    InitiationUI.ListEnemyAttributes(ListofEnemies);
                     break;
                 case 7:
                     startGame();
@@ -47,13 +63,17 @@ public class GameApp {
     }
 
     private static void startGame() {
-        Player player = InitiationUI.getCharacter();
-        player.setItems(InitiationUI.getItems(player));
+        Player player = InitiationUI.getCharacter(ListofPlayableCharacters);
+        player.setItems(InitiationUI.getItems(ListofItems));
         int difficulty = InitiationUI.getDifficulty();
 
         InitiationUI.showLoadingScreen(player, player.getItems(), difficulty);
 
+        // create BattleEngine , pass in difficulty level
+
         BattleEngine BE = new BattleEngine(difficulty);
         BE.StartGame(player);
+
+
     }
 }

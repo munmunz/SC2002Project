@@ -33,4 +33,8 @@ public class Powerstone extends Item {
 
         used = true;
     }
+
+    public Item copy(){
+        return new Powerstone();
+    }
 }
