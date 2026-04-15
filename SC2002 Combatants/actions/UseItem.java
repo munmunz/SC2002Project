@@ -20,8 +20,6 @@ public class UseItem extends Action{
 		}
 
 		item.use((Player) user);
-
-		System.out.println(user.getName() + " used " + item.getType() + "!");
 	}
 	
 	// actual counting of number of items used would be in battle engine 
@@ -31,8 +29,11 @@ public class UseItem extends Action{
         return copy;
     }
 
+	public Item getItem(){
+		return this.item;
+	}
+
 	public void setItem(Item itemChoice){
 		this.item = itemChoice;
 	}
-
 }

@@ -25,14 +25,10 @@ public class ArcaneBlast extends SpecialAction{
             int damage = Math.max(0, user.getAttack() - enemy.getDefense());
             int newHp = Math.max(0, enemy.getHealthPoints() - damage);
             enemy.setHealthPoints(newHp);
-            System.out.println(user.getName() + " blasts " + enemy.getName()
-                    + " for " + damage + " damage! (HP: " + newHp + ")");
 		
             if (newHp == 0) {
             	// killCount ++;
                 killedEnemy = true;
-            	System.out.println(enemy.getName() + " was defeated by Arcane Blast!");
-        
             }
 		}
 

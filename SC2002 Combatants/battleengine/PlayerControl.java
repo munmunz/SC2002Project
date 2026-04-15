@@ -6,6 +6,7 @@ import items.Item;
 import actions.*;
 import actions.exceptions.*;
 import core.BattleField;
+import ui.GameUI;
 import ui.PlayerUI;
 
 public class PlayerControl {
@@ -27,6 +28,7 @@ public class PlayerControl {
         while (true){
             try{
                 action.execute();
+                GameUI.displayAction(action);
                 return true;
             } 
             catch (MissingTargetException e){

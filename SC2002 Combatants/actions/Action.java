@@ -14,10 +14,14 @@ public abstract class Action {
     }
 
     public String getName(){
-        return name;
+        return this.name;
     }
 
     public void setUser(Combatant user){
         this.user = user;
+    }
+
+    public Combatant getUser(){
+        return this.user;
     }
 }

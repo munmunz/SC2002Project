@@ -21,8 +21,6 @@ public class BasicAttack extends Action implements Targetable {
         int newHp = Math.max(0, target.getHealthPoints() - damage);
 
         target.setHealthPoints(newHp);
-        System.out.println(user.getName() + " attacks " + target.getName() + " for " + damage + " damage!");
-        System.out.println(target.getName() + " HP: " + newHp);
     }
 
     public Action copy(){
@@ -33,4 +31,8 @@ public class BasicAttack extends Action implements Targetable {
     public void setTarget(Combatant target){
         this.target = target;
     }
+
+	public Combatant getTarget(){
+		return this.target;
+	}
 }

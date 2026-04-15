@@ -13,7 +13,6 @@ public class Defend extends Action {
     public void execute() {
         DefendStatus defendStatus = new DefendStatus(user);
         user.applyStatus(defendStatus);
-        System.out.println(user.getName() + " takes a defensive stance! (+" + 10 + " Defense)");
     }
 
     public Action copy(){
