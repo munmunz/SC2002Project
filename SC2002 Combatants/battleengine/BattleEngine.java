@@ -4,6 +4,7 @@ import core.BattleField;
 import core.Combatant;
 import core.Enemy;
 import core.Player;
+import items.Item;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -80,7 +81,21 @@ public class BattleEngine {
             ArrayList<Enemy> nextWave = DifficultyLevel.getWave(this.difficulty, nextWaveIndex);
 
             if (nextWave.isEmpty()) {
-                System.out.println("All waves defeated. Player wins!");
+                Player player = BattleField.getPlayer();
+                System.out.println(
+                    "Player Victory Remaining HP: "
+                    + player.getHealthPoints()
+                    + " / "
+                    + player.getMaxHealthPoints()
+                    + " | Total Rounds: "
+                    + roundNumber
+                    + " | Remaining Potion: "
+                    + countRemainingItems(player, "Potion")
+                    + " |\nRemaining Smoke Bomb: "
+                    + countRemainingItems(player, "Smoke Bomb")
+                    + " |\nRemaining PowerStone: "
+                    + countRemainingItems(player, "Powerstone")
+                );
                 System.exit(0);
             } else {
                 this.currentWaveIndex = nextWaveIndex;
@@ -89,5 +104,15 @@ public class BattleEngine {
             }            
         }
         else return; // Player alive and enemy alive, game continues
+    }
+
+    private int countRemainingItems(Player player, String itemType) {
+        int count = 0;
+        for (Item item : player.getItems()) {
+            if (itemType.equals(item.getType()) && !item.isUsed()) {
+                count++;
+            }
+        }
+        return count;
     }
 }
