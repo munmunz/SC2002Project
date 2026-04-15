@@ -71,7 +71,7 @@ public class BattleEngine {
             ArrayList<Enemy> nextWave = DifficultyLevel.getWave(this.difficulty, nextWaveIndex);
 
             if (nextWave.isEmpty()) {
-                GameUI.gameOverWin();
+                GameUI.gameOverWin(roundNumber);
                 System.exit(0);
                 return true;
             } else {

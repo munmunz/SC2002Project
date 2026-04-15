@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import actions.*;
 import core.BattleField;
 import core.Combatant;
+import core.Player;
 import items.Item;
 import statuses.Status;
 
@@ -59,7 +60,7 @@ public class GameUI {
 """);
     } 
     
-    public static void gameOverWin(){
+    public static void gameOverWin(int roundNumber){
         System.out.println();
         System.out.println
             ("""
@@ -70,5 +71,32 @@ public class GameUI {
    ██║   ╚██████╔╝╚██████╔╝      ╚███╔███╔╝██║██║ ╚████║██╗
    ╚═╝    ╚═════╝  ╚═════╝        ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝                                                       
 """);
+
+    Player player = BattleField.getPlayer();
+    System.out.println(
+        "Player Victory Remaining HP: "
+        + player.getHealthPoints()
+        + " / "
+        + player.getMaxHealthPoints()
+        + " | Total Rounds: "
+        + roundNumber
+        + " | Remaining Potion: "
+        + countRemainingItems(player, "Potion")
+        + " |\nRemaining Smoke Bomb: "
+        + countRemainingItems(player, "Smoke Bomb")
+        + " |\nRemaining PowerStone: "
+        + countRemainingItems(player, "Powerstone")
+    );
     }
+
+    private static int countRemainingItems(Player player, String itemType) {
+        int count = 0;
+        for (Item item : player.getItems()) {
+            if (itemType.equals(item.getType()) && !item.isUsed()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 }
