@@ -14,6 +14,7 @@ public class PlayerUI {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
+            System.out.println();
             System.out.println("Please choose which action you would like to use:");
             for (int i = 0; i < length; i++){
                 System.out.printf("  %d. " + actions.get(i).getName() + "\n",i+1);
@@ -33,6 +34,7 @@ public class PlayerUI {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
+            System.out.println();
             System.out.println("Please choose the enemy you would like to target:");
             for (int i = 0; i < length; i++){
                 System.out.printf("  %d. " + enemies.get(i).getName()
@@ -54,6 +56,7 @@ public class PlayerUI {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
+            System.out.println();
             System.out.println("Please choose the item you would like to use:");
             for (int i = 0; i < length; i++){
                 System.out.printf("  %d. " + items.get(i).getType()
