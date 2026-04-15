@@ -24,6 +24,11 @@ public class GameUI {
         System.out.println();
     }
 
+    public static void nextWave(int wave){
+        System.out.println();
+        System.out.printf("All Enemies Defeated!! Wave %d starts in next round!!%n", wave);
+    }
+
     public static void displayAction(Action action){
         String message;
 
@@ -40,5 +45,30 @@ public class GameUI {
         System.out.println();
         System.out.printf(message + "%n");
     }
-                                                                     
+
+    public static void gameOverLose(){
+        System.out.println();
+        System.out.println
+            ("""
+██████╗  █████╗ ███╗   ███╗███████╗       ██████╗ ██╗   ██╗███████╗██████╗
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝      ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+██║  ███╗███████║██╔████╔██║█████╗        ██║   ██║██║   ██║█████╗  ██████╔╝
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝        ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗      ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝       ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
+""");
+    } 
+    
+    public static void gameOverWin(){
+        System.out.println();
+        System.out.println
+            ("""
+██╗   ██╗ ██████╗ ██╗   ██╗      ██╗    ██╗██╗███╗   ██╗██╗
+╚██╗ ██╔╝██╔═══██╗██║   ██║      ██║    ██║██║████╗  ██║██║
+ ╚████╔╝ ██║   ██║██║   ██║      ██║ █╗ ██║██║██╔██╗ ██║██║
+  ╚██╔╝  ██║   ██║██║   ██║      ██║███╗██║██║██║╚██╗██║╚═╝
+   ██║   ╚██████╔╝╚██████╔╝      ╚███╔███╔╝██║██║ ╚████║██╗
+   ╚═╝    ╚═════╝  ╚═════╝        ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝                                                       
+""");
+    }
 }

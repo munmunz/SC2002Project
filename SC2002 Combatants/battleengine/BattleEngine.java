@@ -24,7 +24,6 @@ public class BattleEngine {
 
         while (true) {
             runRound();
-            GameUI.displayRoundInfo(roundNumber);
 
             for (Combatant combatant : BattleField.getAliveCombatants()){
             combatant.decrement(); // Decrement cooldown and status
@@ -53,28 +52,36 @@ public class BattleEngine {
                 combatant.setMovesAvailable(combatant.getMovesAvailable() - 1);
             }
 
-            checkWinLose();
+            if (checkWinLose()){
+                return; // End of round
+            }
         }
+
+        GameUI.displayRoundInfo(roundNumber);
     }
 
-    public void checkWinLose() {
+    public boolean checkWinLose() {
         if (BattleField.getPlayer().getHealthPoints() == 0){
-            System.out.println("Player died. Game over.");
+            GameUI.gameOverLose();
             System.exit(0);
+            return true;
         }
         else if (BattleField.getAliveEnemies().isEmpty()){
             int nextWaveIndex = this.currentWaveIndex + 1;
             ArrayList<Enemy> nextWave = DifficultyLevel.getWave(this.difficulty, nextWaveIndex);
 
             if (nextWave.isEmpty()) {
-                System.out.println("All waves defeated. Player wins!");
+                GameUI.gameOverWin();
                 System.exit(0);
+                return true;
             } else {
+                GameUI.displayRoundInfo(roundNumber);
                 this.currentWaveIndex = nextWaveIndex;
                 BattleField.setEnemies(nextWave);
-                System.out.println("Wave " + (this.currentWaveIndex + 1) + " begins!");
+                GameUI.nextWave(currentWaveIndex + 1);
+                return true;
             }            
         }
-        else return; // Player alive and enemy alive, game continues
+        else return false; // Player alive and enemy alive, game continues
     }
 }
