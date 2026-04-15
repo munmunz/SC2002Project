@@ -60,18 +60,25 @@ public class PlayerUI {
                 +" (Used: " + Boolean.toString(items.get(i).isUsed()) + ")"
                 + "\n",i+1);
             }
+            System.out.println("\n  0. BACK");
+
             int choice = sc.nextInt();        
-            
-            if (1 <= choice && choice <= length){
-                if (items.get(choice - 1).isUsed() == false){
-                    return items.get(choice - 1);
+
+            if (0 <= choice && choice <= length){
+                if (choice == 0){
+                    return null;
                 }
                 else{
-                    System.out.println("Item has been used!! Pick another item!!");
-                    continue;
+                    if (items.get(choice - 1).isUsed() == false){
+                        return items.get(choice - 1);
+                    }
+                    else{
+                        System.out.println("Item has been used!! Pick another item!!");
+                        continue;
+                    }
                 }
             }
             else continue;
         }
-    }    
+    }
 }

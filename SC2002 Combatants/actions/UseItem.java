@@ -2,6 +2,8 @@ package actions;
 
 import core.Player;
 import items.Item;
+import actions.exceptions.MissingItemException;
+
 public class UseItem extends Action{
 	private Item item;
 	// private Combatant target; // Not needed
@@ -12,9 +14,12 @@ public class UseItem extends Action{
 		super(NAME);
 	}
 	
-	public void execute() {
-		item.use((Player) user);
+	public void execute()  throws MissingItemException{
+		if (item == null){
+			throw new MissingItemException();
+		}
 
+		item.use((Player) user);
 
 		System.out.println(user.getName() + " used " + item.getType() + "!");
 	}
