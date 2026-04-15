@@ -2,6 +2,8 @@ package actions;
 
 import core.Player;
 import items.Item;
+import actions.exceptions.MissingItemException;
+
 public class UseItem extends Action{
 	private Item item;
 	// private Combatant target; // Not needed
@@ -12,11 +14,12 @@ public class UseItem extends Action{
 		super(NAME);
 	}
 	
-	public void execute() {
+	public void execute()  throws MissingItemException{
+		if (item == null){
+			throw new MissingItemException();
+		}
+
 		item.use((Player) user);
-
-
-		System.out.println(user.getName() + " used " + item.getType() + "!");
 	}
 	
 	// actual counting of number of items used would be in battle engine 
@@ -26,8 +29,11 @@ public class UseItem extends Action{
         return copy;
     }
 
+	public Item getItem(){
+		return this.item;
+	}
+
 	public void setItem(Item itemChoice){
 		this.item = itemChoice;
 	}
-
 }

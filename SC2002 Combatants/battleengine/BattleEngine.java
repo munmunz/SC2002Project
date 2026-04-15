@@ -5,10 +5,9 @@ import core.Combatant;
 import core.Enemy;
 import core.Player;
 import java.util.ArrayList;
-import java.util.Scanner;
+import ui.GameUI;
 
 public class BattleEngine {
-    private static final Scanner scanner = new Scanner(System.in);
     private int roundNumber;
     private int difficulty;
     private int currentWaveIndex;
@@ -25,11 +24,12 @@ public class BattleEngine {
 
         while (true) {
             runRound();
-            roundNumber +=1;
 
             for (Combatant combatant : BattleField.getAliveCombatants()){
             combatant.decrement(); // Decrement cooldown and status
             }
+
+            roundNumber +=1;
         }
     }
 
@@ -41,53 +41,47 @@ public class BattleEngine {
         }
 
         for (Combatant combatant : turnOrder){
-            if (combatant.getHealthPoints() <= 0) {
-                combatant.setMovesAvailable(0);
-                continue;
-            }
-
-            while (combatant.getMovesAvailable() > 0){
-                if (combatant.getHealthPoints() <= 0) {
-                    combatant.setMovesAvailable(0);
-                    break;
-                }
-
+            while (combatant.getHealthPoints() > 0 && combatant.getMovesAvailable() > 0){
                 if (combatant instanceof Player){
                     PlayerControl.getPlayerMove((Player) combatant);
-                    System.out.println("Press Enter to continue...");
-                    scanner.nextLine();
                 }
                 else if (combatant instanceof Enemy){
                     EnemyControl.getEnemyMove((Enemy) combatant);
-                    System.out.println("Press Enter to continue...");
-                    scanner.nextLine();
                 }
 
                 combatant.setMovesAvailable(combatant.getMovesAvailable() - 1);
             }
 
-            checkWinLose();
+            if (checkWinLose()){
+                return; // End of round
+            }
         }
+
+        GameUI.displayRoundInfo(roundNumber);
     }
 
-    public void checkWinLose() {
+    public boolean checkWinLose() {
         if (BattleField.getPlayer().getHealthPoints() == 0){
-            System.out.println("Player died. Game over.");
+            GameUI.gameOverLose();
             System.exit(0);
+            return true;
         }
         else if (BattleField.getAliveEnemies().isEmpty()){
             int nextWaveIndex = this.currentWaveIndex + 1;
             ArrayList<Enemy> nextWave = DifficultyLevel.getWave(this.difficulty, nextWaveIndex);
 
             if (nextWave.isEmpty()) {
-                System.out.println("All waves defeated. Player wins!");
+                GameUI.gameOverWin(roundNumber);
                 System.exit(0);
+                return true;
             } else {
+                GameUI.displayRoundInfo(roundNumber);
                 this.currentWaveIndex = nextWaveIndex;
                 BattleField.setEnemies(nextWave);
-                System.out.println("Wave " + (this.currentWaveIndex + 1) + " begins!");
+                GameUI.nextWave(currentWaveIndex + 1);
+                return true;
             }            
         }
-        else return; // Player alive and enemy alive, game continues
+        else return false; // Player alive and enemy alive, game continues
     }
 }

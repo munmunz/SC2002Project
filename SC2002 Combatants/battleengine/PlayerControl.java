@@ -4,19 +4,15 @@ import core.Player;
 import core.Enemy;
 import items.Item;
 import actions.*;
-import actions.exceptions.MissingTargetException;
-import actions.exceptions.ActionOnCooldownException;
+import actions.exceptions.*;
 import core.BattleField;
+import ui.GameUI;
 import ui.PlayerUI;
 
 public class PlayerControl {
     public static void getPlayerMove(Player player){
         while (true){
             Action choice = PlayerUI.chooseAction(player.getActions());
-            if (choice instanceof UseItem){
-                Item targetItem = PlayerUI.chooseItem(player.getItems());
-                ((UseItem) choice).setItem(targetItem);
-            }
 
             choice.setUser(player);
 
@@ -32,6 +28,7 @@ public class PlayerControl {
         while (true){
             try{
                 action.execute();
+                GameUI.displayAction(action);
                 return true;
             } 
             catch (MissingTargetException e){
@@ -42,7 +39,13 @@ public class PlayerControl {
                 System.out.println("Error for " + action.getName() + ": " + e.getMessage());
                 return false;
             }
-
+            catch (MissingItemException e){
+                Item item = PlayerUI.chooseItem(player.getItems());
+                if (item == null){
+                    return false;
+                }
+                else ((UseItem) action).setItem(item);
+            }
         }
     }
 }
