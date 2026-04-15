@@ -217,7 +217,7 @@ public class InitiationUI {
     }
 
 
-    private static int readInt(int min, int max) {
+    protected static int readInt(int min, int max) {
         while (true) {
             try {
                 int value = Integer.parseInt(scanner.nextLine().trim());
