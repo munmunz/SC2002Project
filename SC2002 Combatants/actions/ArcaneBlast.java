@@ -18,7 +18,7 @@ public class ArcaneBlast extends SpecialAction{
 		if (this.cooldown > 0){
 			throw new ActionOnCooldownException(this.cooldown);
 		}
-        boolean killedEnemy = false;
+        int killCount = 0;
 
 
         for (Enemy enemy : BattleField.getAliveEnemies()) {
@@ -27,12 +27,11 @@ public class ArcaneBlast extends SpecialAction{
             enemy.setHealthPoints(newHp);
 		
             if (newHp == 0) {
-            	// killCount ++;
-                killedEnemy = true;
+            	killCount += 1;
             }
 		}
 
-        if (killedEnemy) {
+        for (int i = 0; i < killCount;i++) {
             ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user);
             user.applyStatus(blastStatus);
         }
