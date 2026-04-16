@@ -14,9 +14,6 @@ import actions.*;
 
 
 public class InitiationUI {
-
-    private static final Scanner scanner = new Scanner(System.in);
-
     public static void ListPlayers(List<Player> ListofPlayableCharacters) {
       System.out.println("=== Players ===");
         for (Player player : ListofPlayableCharacters) {
@@ -95,7 +92,7 @@ public class InitiationUI {
         }
 
         System.out.print("Please enter input: ");
-        int choice = readInt(1, listOfPlayableCharacters.size());
+        int choice = HandleInput.readInt(1, listOfPlayableCharacters.size());
 
         Player chosen = listOfPlayableCharacters.get(choice - 1);
         System.out.println("You chose: " + chosen.getName() + "\n");
@@ -117,7 +114,7 @@ public class InitiationUI {
 
         for (int i = 1; i <= size; i++) {
             System.out.print("Choose item " + i + ": ");
-            int choice = readInt(1, listOfItems.size());
+            int choice = HandleInput.readInt(1, listOfItems.size());
 
             Item chosen = (listOfItems.get(choice - 1)).copy();
             chosenItems[i-1] = chosen;
@@ -135,7 +132,7 @@ public class InitiationUI {
         System.out.println("  3. Hard");
         System.out.print("Please enter input: ");
 
-        int choice = readInt(1, 3);
+        int choice = HandleInput.readInt(1, 3);
         switch (choice) {
             case 1:
                 System.out.println("You chose: Easy\n");
@@ -162,7 +159,7 @@ public class InitiationUI {
         System.out.println("  6. List Enemies' Attributes");
         System.out.println("  7. Start Game");
         System.out.print("Please enter input: ");
-        return readInt(1, 7);
+        return HandleInput.readInt(1, 7);
     }
 
     public static void showLoadingScreen(Player player, Item[] items, int difficulty) {
@@ -217,17 +214,5 @@ public class InitiationUI {
     }
 
 
-    protected static int readInt(int min, int max) {
-        while (true) {
-            try {
-                int value = Integer.parseInt(scanner.nextLine().trim());
-                if (value >= min && value <= max) {
-                    return value;
-                }
-                System.out.print("Invalid input. Enter a number between " + min + " and " + max + ": ");
-            } catch (NumberFormatException e) {
-                System.out.print("Invalid input. Enter a number between " + min + " and " + max + ": ");
-            }
-        }
-    }
+
 }

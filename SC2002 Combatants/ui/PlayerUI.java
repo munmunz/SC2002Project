@@ -15,7 +15,7 @@ public class PlayerUI {
             for (int i = 0; i < length; i++){
                 System.out.printf("  %d. " + actions.get(i).getName() + "\n",i+1);
             }
-            int choice = InitiationUI.readInt(1,length);       
+            int choice = HandleInput.readInt(1,length);       
             
             if (1 <= choice && choice <= length){
                 return (actions.get(choice - 1)).copy();
@@ -35,7 +35,7 @@ public class PlayerUI {
                 +" (HP: " + enemies.get(i).getHealthPoints() + "/" + enemies.get(i).getMaxHealthPoints() + ")"
                 + "\n",i+1);
             }
-            int choice = InitiationUI.readInt(1,length);        
+            int choice = HandleInput.readInt(1,length);        
             
             if (1 <= choice && choice <= length){
                 return enemies.get(choice - 1);
@@ -57,7 +57,7 @@ public class PlayerUI {
             }
             System.out.println("\n  0. BACK");
 
-            int choice = InitiationUI.readInt(0,length);         
+            int choice = HandleInput.readInt(0,length);         
 
             if (0 <= choice && choice <= length){
                 if (choice == 0){
