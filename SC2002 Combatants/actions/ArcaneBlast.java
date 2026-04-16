@@ -18,25 +18,20 @@ public class ArcaneBlast extends SpecialAction{
 		if (this.cooldown > 0){
 			throw new ActionOnCooldownException(this.cooldown);
 		}
-        boolean killedEnemy = false;
+        int killCount = 0;
 
 
         for (Enemy enemy : BattleField.getAliveEnemies()) {
             int damage = Math.max(0, user.getAttack() - enemy.getDefense());
             int newHp = Math.max(0, enemy.getHealthPoints() - damage);
             enemy.setHealthPoints(newHp);
-            System.out.println(user.getName() + " blasts " + enemy.getName()
-                    + " for " + damage + " damage! (HP: " + newHp + ")");
 		
             if (newHp == 0) {
-            	// killCount ++;
-                killedEnemy = true;
-            	System.out.println(enemy.getName() + " was defeated by Arcane Blast!");
-        
+            	killCount += 1;
             }
 		}
 
-        if (killedEnemy) {
+        for (int i = 0; i < killCount;i++) {
             ArcaneBlastStatus blastStatus = new ArcaneBlastStatus(user);
             user.applyStatus(blastStatus);
         }

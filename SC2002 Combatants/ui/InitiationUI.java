@@ -15,12 +15,9 @@ import actions.*;
 import battleengine.DifficultyLevel;
 
 public class InitiationUI {
-
-    private static final Scanner scanner = new Scanner(System.in);
-
-    public static void ListPlayers(List<Player> listOfPlayableCharacters) {
-        System.out.println("=== Players ===");
-        for (Player player : listOfPlayableCharacters) {
+    public static void ListPlayers(List<Player> ListofPlayableCharacters) {
+      System.out.println("=== Players ===");
+        for (Player player : ListofPlayableCharacters) {
             System.out.println("  - " + player.getName());
         }
         System.out.println();
@@ -99,26 +96,32 @@ public class InitiationUI {
             System.out.println("  " + (i + 1) + ". " + listOfPlayableCharacters.get(i).getName());
         }
         System.out.print("Please enter input: ");
-        int choice = readInt(1, listOfPlayableCharacters.size());
+        int choice = HandleInput.readInt(1, listOfPlayableCharacters.size());
+
         Player chosen = listOfPlayableCharacters.get(choice - 1);
         System.out.println("You chose: " + chosen.getName() + "\n");
         return chosen;
     }
 
-    public static ArrayList<Item> getItems(List<Item> listOfItems) {
-        ArrayList<Item> chosenItems = new ArrayList<>();
+
+    // private static List<Item> ListofItems = List.of(new Potion(), new Powerstone(), new SmokeBomb()); for reference 
+
+    public static Item[] getItems(List<Item> listOfItems, int size) {
+        Item[] chosenItems = new Item[size];
 
         System.out.println("Available items:");
         for (int i = 0; i < listOfItems.size(); i++) {
-            System.out.println("  " + (i + 1) + ". " + listOfItems.get(i).getType());
+            Item item = listOfItems.get(i);
+            System.out.println("  " + (i + 1) + ". " + item.getType());  // leave out item descriptions 
         }
-        System.out.println("You may pick 2 items (duplicates allowed).\n");
+        System.out.printf("You may pick %d items (duplicates allowed).\n\n",size);
 
-        for (int i = 1; i <= 2; i++) {
+        for (int i = 1; i <= size; i++) {
             System.out.print("Choose item " + i + ": ");
-            int choice = readInt(1, listOfItems.size());
-            Item chosen = listOfItems.get(choice - 1).copy();
-            chosenItems.add(chosen);
+            int choice = HandleInput.readInt(1, listOfItems.size());
+
+            Item chosen = (listOfItems.get(choice - 1)).copy();
+            chosenItems[i-1] = chosen;
             System.out.println("  Added: " + chosen.getType() + "\n");
         }
 
@@ -146,7 +149,7 @@ public class InitiationUI {
         System.out.println("  6. List Enemies' Attributes");
         System.out.println("  7. Start Game");
         System.out.print("Please enter input: ");
-        return readInt(1, 7);
+        return HandleInput.readInt(1, 7);
     }
 
     public static void showLoadingScreen(Player player, ArrayList<Item> items, int difficulty) {
@@ -154,8 +157,34 @@ public class InitiationUI {
 
         ArrayList<Enemy> initialWave = DifficultyLevel.getWave(difficulty, 0);
         ArrayList<Enemy> backupWave  = DifficultyLevel.getWave(difficulty, 1);
+    public static void showLoadingScreen(Player player, Item[] items, int difficulty) {
+        String diffLabel;
+        String initialSpawn;
+        String backupSpawn;
 
-        String itemSummary = items.get(0).getType() + " + " + items.get(1).getType();
+        switch (difficulty) {
+            case 1:
+                diffLabel = "Easy";
+                initialSpawn = "3 Goblins - Goblin A + Goblin B + Goblin C";
+                backupSpawn = null;
+                break;
+            case 2:
+                diffLabel = "Medium";
+                initialSpawn = "1 Goblin + 1 Wolf";
+                backupSpawn = "Wolf A + Wolf B";
+                break;
+            case 3:
+                diffLabel = "Hard";
+                initialSpawn = "2 Goblins - Goblin A + Goblin B";
+                backupSpawn = "Goblin A + Wolf A + Wolf B";
+                break;
+            default:
+                diffLabel = "Unknown";
+                initialSpawn = "Unknown";
+                backupSpawn = null;
+        }
+
+        String itemSummary = items[0].getType() + " + " + items[1].getType();
 
         System.out.println("============================================");
         System.out.println("Difficulty Level (" + diffLabel + ")");
@@ -207,17 +236,5 @@ public class InitiationUI {
         return sb.toString();
     }
 
-    private static int readInt(int min, int max) {
-        while (true) {
-            try {
-                int value = Integer.parseInt(scanner.nextLine().trim());
-                if (value >= min && value <= max) {
-                    return value;
-                }
-                System.out.print("Invalid input. Enter a number between " + min + " and " + max + ": ");
-            } catch (NumberFormatException e) {
-                System.out.print("Invalid input. Enter a number between " + min + " and " + max + ": ");
-            }
-        }
-    }
+
 }

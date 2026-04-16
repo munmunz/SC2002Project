@@ -7,21 +7,21 @@ import actions.*;
 import java.util.Iterator;
 
 public abstract class Player extends Combatant {
-    private ArrayList<Item> items;
+    private Item[] items;
 
     protected Player(String name,int healthPoints,int attack,int defense,int speed, int maxHealthPoints, int skillCooldown) {
         super(name, healthPoints, attack, defense, speed, maxHealthPoints);
-        this.items = new ArrayList<>();
+        this.items = new Item[2];
 
         this.actions.add(new BasicAttack());
         this.actions.add(new Defend());
         this.actions.add(new UseItem());
     }
 
-    public ArrayList<Item> getItems(){
+    public Item[] getItems(){
         return items;
     }
-    public void setItems(ArrayList<Item> items) {
+    public void setItems(Item[] items) {
         this.items = items;
     }
 

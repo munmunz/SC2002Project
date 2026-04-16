@@ -27,16 +27,11 @@ public class ShieldBash extends SpecialAction implements Targetable{
         int damage = Math.max(0, user.getAttack() - target.getDefense());
         int newHp = Math.max(0, target.getHealthPoints() - damage);
         target.setHealthPoints(newHp);
-        System.out.println(user.getName() + " uses Shield Bash on " + target.getName()  //placeholder for battle engine dialogue
-                + " for " + damage + " damage!");
 
        
         if (newHp > 0) {
             Stun stun = new Stun(target);
             target.applyStatus(stun);
-            
-            System.out.println(target.getName() + " is stunned!");
-        
         }
     
 
@@ -54,6 +49,10 @@ public class ShieldBash extends SpecialAction implements Targetable{
 	public void setTarget(Combatant target){
         this.target = target;
     }
+
+	public Combatant getTarget(){
+		return this.target;
+	}
 
 	public int getCooldown(){
 		return this.cooldown;

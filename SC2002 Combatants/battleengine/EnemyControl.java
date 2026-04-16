@@ -4,6 +4,7 @@ import actions.Action;
 import actions.Targetable;
 import core.BattleField;
 import core.Enemy;
+import ui.GameUI;
 
 public class EnemyControl {
 
@@ -16,5 +17,6 @@ public class EnemyControl {
         }
 
         move.execute();
+        GameUI.displayAction(move);
     }
 }
