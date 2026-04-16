@@ -71,32 +71,6 @@ public class GameUI {
    ██║   ╚██████╔╝╚██████╔╝      ╚███╔███╔╝██║██║ ╚████║██╗
    ╚═╝    ╚═════╝  ╚═════╝        ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝                                                       
 """);
-
-    Player player = BattleField.getPlayer();
-    System.out.println(
-        "Player Victory Remaining HP: "
-        + player.getHealthPoints()
-        + " / "
-        + player.getMaxHealthPoints()
-        + " | Total Rounds: "
-        + roundNumber
-        + " | Remaining Potion: "
-        + countRemainingItems(player, "Potion")
-        + " |\nRemaining Smoke Bomb: "
-        + countRemainingItems(player, "Smoke Bomb")
-        + " |\nRemaining PowerStone: "
-        + countRemainingItems(player, "Powerstone")
-    );
     }
-
-    private static int countRemainingItems(Player player, String itemType) {
-        int count = 0;
-        for (Item item : player.getItems()) {
-            if (itemType.equals(item.getType()) && !item.isUsed()) {
-                count++;
-            }
-        }
-        return count;
-    }
-
+    
 }
