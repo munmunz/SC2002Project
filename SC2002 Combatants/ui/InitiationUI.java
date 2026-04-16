@@ -105,26 +105,26 @@ public class InitiationUI {
 
     // private static List<Item> ListofItems = List.of(new Potion(), new Powerstone(), new SmokeBomb()); for reference 
 
-    public static ArrayList<Item> getItems(List<Item> listOfItems) {
-    ArrayList<Item> chosenItems = new ArrayList<>();
+    public static Item[] getItems(List<Item> listOfItems, int size) {
+        Item[] chosenItems = new Item[size];
 
-    System.out.println("Available items:");
-    for (int i = 0; i < listOfItems.size(); i++) {
-        Item item = listOfItems.get(i);
-        System.out.println("  " + (i + 1) + ". " + item.getType());  // leave out item descriptions 
-    }
-    System.out.println("You may pick 2 items (duplicates allowed).\n");
+        System.out.println("Available items:");
+        for (int i = 0; i < listOfItems.size(); i++) {
+            Item item = listOfItems.get(i);
+            System.out.println("  " + (i + 1) + ". " + item.getType());  // leave out item descriptions 
+        }
+        System.out.printf("You may pick %d items (duplicates allowed).\n\n",size);
 
-    for (int i = 1; i <= 2; i++) {
-        System.out.print("Choose item " + i + ": ");
-        int choice = readInt(1, listOfItems.size());
+        for (int i = 1; i <= size; i++) {
+            System.out.print("Choose item " + i + ": ");
+            int choice = readInt(1, listOfItems.size());
 
-        Item chosen = (listOfItems.get(choice - 1)).copy();
-        chosenItems.add(chosen);
-        System.out.println("  Added: " + chosen.getType() + "\n");
-    }
+            Item chosen = (listOfItems.get(choice - 1)).copy();
+            chosenItems[i-1] = chosen;
+            System.out.println("  Added: " + chosen.getType() + "\n");
+        }
 
-    return chosenItems;
+        return chosenItems;
     }
 
 
@@ -165,7 +165,7 @@ public class InitiationUI {
         return readInt(1, 7);
     }
 
-    public static void showLoadingScreen(Player player, ArrayList<Item> items, int difficulty) {
+    public static void showLoadingScreen(Player player, Item[] items, int difficulty) {
         String diffLabel;
         String initialSpawn;
         String backupSpawn;
@@ -192,7 +192,7 @@ public class InitiationUI {
                 backupSpawn = null;
         }
 
-        String itemSummary = items.get(0).getType() + " + " + items.get(1).getType();
+        String itemSummary = items[0].getType() + " + " + items[1].getType();
 
         System.out.println("============================================");
         System.out.println("Difficulty Level (" + diffLabel + ")");

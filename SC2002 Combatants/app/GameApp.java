@@ -64,7 +64,7 @@ private static List<Item> ListofItems = List.of(new Potion(), new Powerstone(), 
 
     private static void startGame() {
         Player player = InitiationUI.getCharacter(ListofPlayableCharacters);
-        player.setItems(InitiationUI.getItems(ListofItems));
+        player.setItems(InitiationUI.getItems(ListofItems,player.getItems().length));
         int difficulty = InitiationUI.getDifficulty();
 
         InitiationUI.showLoadingScreen(player, player.getItems(), difficulty);

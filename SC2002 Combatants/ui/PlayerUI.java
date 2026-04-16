@@ -44,15 +44,15 @@ public class PlayerUI {
         }
     }
 
-    public static Item chooseItem(ArrayList<Item> items){
-        int length = items.size();
+    public static Item chooseItem(Item[] items){
+        int length = items.length;
 
         while (true) {
             System.out.println();
             System.out.println("Please choose the item you would like to use:");
             for (int i = 0; i < length; i++){
-                System.out.printf("  %d. " + items.get(i).getType()
-                +" (Used: " + Boolean.toString(items.get(i).isUsed()) + ")"
+                System.out.printf("  %d. " + items[i].getType()
+                +" (Used: " + Boolean.toString(items[i].isUsed()) + ")"
                 + "\n",i+1);
             }
             System.out.println("\n  0. BACK");
@@ -64,8 +64,9 @@ public class PlayerUI {
                     return null;
                 }
                 else{
-                    if (items.get(choice - 1).isUsed() == false){
-                        return items.get(choice - 1);
+                    Item chosenItem = items[choice-1];
+                    if (chosenItem.isUsed() == false){
+                        return chosenItem;
                     }
                     else{
                         System.out.println("Item has been used!! Pick another item!!");
