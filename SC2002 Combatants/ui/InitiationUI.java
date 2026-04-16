@@ -15,15 +15,15 @@ import actions.*;
 import battleengine.DifficultyLevel;
 
 public class InitiationUI {
-    public static void ListPlayers(List<Player> ListofPlayableCharacters) {
+    public static void listPlayers(List<Player> listofPlayableCharacters) {
       System.out.println("=== Players ===");
-        for (Player player : ListofPlayableCharacters) {
+        for (Player player : listofPlayableCharacters) {
             System.out.println("  - " + player.getName());
         }
         System.out.println();
     }
 
-    public static void ListPlayerAttributes(List<Player> listOfPlayableCharacters) {
+    public static void listPlayerAttributes(List<Player> listOfPlayableCharacters) {
         for (Player player : listOfPlayableCharacters) {
             System.out.println("=== " + player.getName() + " ===");
             System.out.println("  HP: " + player.getHealthPoints() +
@@ -42,14 +42,14 @@ public class InitiationUI {
         }
     }
 
-    public static void ListDifficulty() {
+    public static void listDifficulty() {
         System.out.println("Difficulty Levels:");
         for (int i = 0; i < DifficultyLevel.DIFFICULTY_COUNT; i++) {
             System.out.println("  " + (i + 1) + ". " + DifficultyLevel.DIFFICULTY_NAMES[i]);
         }
     }
 
-    public static void ListCombatantsDifficulty() {
+    public static void listCombatantsDifficulty() {
         System.out.println("=== Enemy Combatants by Difficulty ===");
         for (int diff = 1; diff <= DifficultyLevel.DIFFICULTY_COUNT; diff++) {
             String label = DifficultyLevel.DIFFICULTY_NAMES[diff - 1];
@@ -67,7 +67,7 @@ public class InitiationUI {
         }
     }
 
-    public static void ListEnemies(List<Enemy> listOfEnemies) {
+    public static void listEnemies(List<Enemy> listOfEnemies) {
         System.out.println("=== Enemies ===");
         for (Enemy enemy : listOfEnemies) {
             System.out.println("  - " + enemy.getName());
@@ -75,7 +75,7 @@ public class InitiationUI {
         System.out.println();
     }
 
-    public static void ListEnemyAttributes(List<Enemy> listOfEnemies) {
+    public static void listEnemyAttributes(List<Enemy> listOfEnemies) {
         for (Enemy enemy : listOfEnemies) {
             System.out.println("=== " + enemy.getName() + " ===");
             System.out.println("  HP: " + enemy.getHealthPoints() +
@@ -134,55 +134,31 @@ public class InitiationUI {
             System.out.println("  " + (i + 1) + ". " + DifficultyLevel.DIFFICULTY_NAMES[i]);
         }
         System.out.print("Please enter input: ");
-        int choice = readInt(1, DifficultyLevel.DIFFICULTY_COUNT);
+        int choice = HandleInput.readInt(1, DifficultyLevel.DIFFICULTY_COUNT);
         System.out.println("You chose: " + DifficultyLevel.DIFFICULTY_NAMES[choice - 1] + "\n");
         return choice;
     }
 
     public static int showMainMenu() {
         System.out.println("Welcome to our game!!");
-        System.out.println("  1. List Players (Warrior and Wizard)");
+        System.out.println("  1. List Players");
         System.out.println("  2. List Players' Attributes");
-        System.out.println("  3. List levels of difficulty - Easy, Medium, Hard");
+        System.out.println("  3. List levels of difficulty");
         System.out.println("  4. List number of enemy combatants by levels of difficulty");
-        System.out.println("  5. List Enemies (Goblin, Wolf)");
+        System.out.println("  5. List Enemies");
         System.out.println("  6. List Enemies' Attributes");
         System.out.println("  7. Start Game");
         System.out.print("Please enter input: ");
         return HandleInput.readInt(1, 7);
     }
 
-    public static void showLoadingScreen(Player player, ArrayList<Item> items, int difficulty) {
+
+
+    public static void showLoadingScreen(Player player, Item[] items, int difficulty) {
         String diffLabel = DifficultyLevel.DIFFICULTY_NAMES[difficulty - 1];
 
         ArrayList<Enemy> initialWave = DifficultyLevel.getWave(difficulty, 0);
         ArrayList<Enemy> backupWave  = DifficultyLevel.getWave(difficulty, 1);
-    public static void showLoadingScreen(Player player, Item[] items, int difficulty) {
-        String diffLabel;
-        String initialSpawn;
-        String backupSpawn;
-
-        switch (difficulty) {
-            case 1:
-                diffLabel = "Easy";
-                initialSpawn = "3 Goblins - Goblin A + Goblin B + Goblin C";
-                backupSpawn = null;
-                break;
-            case 2:
-                diffLabel = "Medium";
-                initialSpawn = "1 Goblin + 1 Wolf";
-                backupSpawn = "Wolf A + Wolf B";
-                break;
-            case 3:
-                diffLabel = "Hard";
-                initialSpawn = "2 Goblins - Goblin A + Goblin B";
-                backupSpawn = "Goblin A + Wolf A + Wolf B";
-                break;
-            default:
-                diffLabel = "Unknown";
-                initialSpawn = "Unknown";
-                backupSpawn = null;
-        }
 
         String itemSummary = items[0].getType() + " + " + items[1].getType();
 

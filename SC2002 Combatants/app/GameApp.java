@@ -35,22 +35,22 @@ private static List<Item> ListofItems = List.of(new Potion(), new Powerstone(), 
 
             switch (menuChoice) {
                 case 1:
-                    InitiationUI.ListPlayers(ListofPlayableCharacters);
+                    InitiationUI.listPlayers(ListofPlayableCharacters);
                     break;
                 case 2:
-                    InitiationUI.ListPlayerAttributes(ListofPlayableCharacters);
+                    InitiationUI.listPlayerAttributes(ListofPlayableCharacters);
                     break;
                 case 3:
-                    InitiationUI.ListDifficulty();
+                    InitiationUI.listDifficulty();
                     break;
                 case 4:
-                    InitiationUI.ListCombatantsDifficulty();
+                    InitiationUI.listCombatantsDifficulty();
                     break;
                 case 5:
-                    InitiationUI.ListEnemies(ListofEnemies);
+                    InitiationUI.listEnemies(ListofEnemies);
                     break;
                 case 6:
-                    InitiationUI.ListEnemyAttributes(ListofEnemies);
+                    InitiationUI.listEnemyAttributes(ListofEnemies);
                     break;
                 case 7:
                     startGame();
