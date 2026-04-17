@@ -27,7 +27,7 @@ public class PlayerControl {
         // Return true if action done successfully, false if action is not possible to be done
         while (true){
             try{
-                System.out.println(action.execute());
+                GameUI.displayAction(action.execute());
                 return true;
             } 
             catch (MissingTargetException e){

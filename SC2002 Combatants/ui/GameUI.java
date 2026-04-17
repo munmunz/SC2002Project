@@ -30,21 +30,9 @@ public class GameUI {
         System.out.printf("All Enemies Defeated!! Wave %d starts in next round!!%n", wave);
     }
 
-    public static void displayAction(Action action){
-        String message;
-
-        if (action instanceof Targetable){
-            Combatant target = ((Targetable) action).getTarget();
-            message = action.getUser().getName() + " used " + action.getName() + " on " + target.getName();
-        }
-        else if (action instanceof UseItem){
-            Item item = ((UseItem) action).getItem();
-            message = action.getUser().getName() + " used " + item.getType();
-        }
-        else message = action.getUser().getName() + " used " + action.getName();
-
+    public static void displayAction(String message){
         System.out.println();
-        System.out.printf(message + "%n");
+        System.out.println(message);
     }
 
     public static void gameOverLose(){

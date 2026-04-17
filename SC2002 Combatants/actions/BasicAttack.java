@@ -23,7 +23,7 @@ public class BasicAttack extends Action implements Targetable {
 
         target.setHealthPoints(newHP);
 
-        return user.getName() + " used Basic Attack on " + target.getName() + " (HP: " + originalHP + " → " + newHP + ")";
+        return user.getName() + " used Basic Attack on " + target.getName() + " (HP: " + originalHP + " -> " + newHP + ")";
     }
 
     public Action copy(){

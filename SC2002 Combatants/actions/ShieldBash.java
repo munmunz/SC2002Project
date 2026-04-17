@@ -39,7 +39,7 @@ public class ShieldBash extends SpecialAction implements Targetable{
         // Set cooldown (3 turns including current)
         this.cooldown = 3;
 
-        return user.getName() + " used Shield Bash on " + target.getName() + " (HP: " + originalHP + " → " + newHP + ")" + "\n" + target.getName() + "is stunned";
+        return user.getName() + " used Shield Bash on " + target.getName() + " (HP: " + originalHP + " -> " + newHP + ")" + "\n" + target.getName() + "is stunned";
     }
 
 	public Action copy(){
