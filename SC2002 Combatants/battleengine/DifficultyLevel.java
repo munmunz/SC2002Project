@@ -8,6 +8,9 @@ import core.Enemy;
 
 public class DifficultyLevel {
 
+    public static final int DIFFICULTY_COUNT = 3;
+    public static final String[] DIFFICULTY_NAMES = {"Easy", "Medium", "Hard"};
+
     /**
      * This the specific wave of enemies based on the chosen difficulty.
      * Instead of hardcoding 'getInitial()' and 'getBackup()', we use a single 
