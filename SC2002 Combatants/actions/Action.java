@@ -6,7 +6,7 @@ public abstract class Action {
     private String name;
     protected Combatant user;
 
-    public abstract void execute();
+    public abstract String execute();
     public abstract Action copy();
 
     protected Action(String name){

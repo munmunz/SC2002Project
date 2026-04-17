@@ -14,12 +14,14 @@ public class UseItem extends Action{
 		super(NAME);
 	}
 	
-	public void execute()  throws MissingItemException{
+	public String execute()  throws MissingItemException{
 		if (item == null){
 			throw new MissingItemException();
 		}
 
 		item.use((Player) user);
+
+		return user.getName() + " used Item (" + item.getType() + ")";
 	}
 	
 	// actual counting of number of items used would be in battle engine 

@@ -27,8 +27,7 @@ public class PlayerControl {
         // Return true if action done successfully, false if action is not possible to be done
         while (true){
             try{
-                action.execute();
-                GameUI.displayAction(action);
+                System.out.println(action.execute());
                 return true;
             } 
             catch (MissingTargetException e){
@@ -40,6 +39,7 @@ public class PlayerControl {
                 return false;
             }
             catch (MissingItemException e){
+                Player player = (Player) action.getUser();
                 Item item = PlayerUI.chooseItem(player.getItems());
                 if (item == null){
                     return false;
