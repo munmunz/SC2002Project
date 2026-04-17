@@ -1,5 +1,6 @@
 package ui;
 
+import java.util.prefs.BackingStoreException;
 import java.util.stream.Collectors;
 
 import actions.*;
@@ -59,6 +60,21 @@ public class GameUI {
    ██║   ╚██████╔╝╚██████╔╝      ╚███╔███╔╝██║██║ ╚████║██╗
    ╚═╝    ╚═════╝  ╚═════╝        ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝                                                       
 """);
+
+    Player player = BattleField.getPlayer();
+
+    System.out.println("Player Victory | Remaining HP: " + player.getHealthPoints()
+                    + " / " + player.getMaxHealthPoints()
+                    + " | Total Rounds: " + roundNumber
+                );
+
+    Item[] items = player.getItems();
+    System.out.println("Items:");
+    for (int i = 0; i < items.length; i++){
+        System.out.printf("  %d. " + items[i].getType()
+        +" (Used: " + Boolean.toString(items[i].isUsed()) + ")"
+        + "\n",i+1);
     }
     
+    }
 }
