@@ -16,14 +16,14 @@ public class PlayerControl {
 
             choice.setUser(player);
 
-            boolean success = doAction(player,choice);
+            boolean success = doAction(choice);
             if (success){
                 return;
             }else continue;
         }
     }
 
-    public static boolean doAction(Player player, Action action){
+    public static boolean doAction(Action action){
         // Return true if action done successfully, false if action is not possible to be done
         while (true){
             try{
