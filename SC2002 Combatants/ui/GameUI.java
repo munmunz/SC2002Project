@@ -1,6 +1,5 @@
 package ui;
 
-import java.util.prefs.BackingStoreException;
 import java.util.stream.Collectors;
 
 import actions.*;
