@@ -14,7 +14,7 @@ public class ArcaneBlast extends SpecialAction{
 		super(NAME);
 	}
 
-    public void execute() throws ActionOnCooldownException{
+    public String execute() throws ActionOnCooldownException{
 		if (this.cooldown > 0){
 			throw new ActionOnCooldownException(this.cooldown);
 		}
@@ -37,7 +37,9 @@ public class ArcaneBlast extends SpecialAction{
         }
 
         this.cooldown = 3;
-       
+
+        return user.getName() + " used Arcane Blast\n" +
+		 "Added " + killCount + "x Arcane Blast status effect";
 	}
       
     public Action copy(){

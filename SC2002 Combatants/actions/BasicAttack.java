@@ -12,15 +12,18 @@ public class BasicAttack extends Action implements Targetable {
         target = null;
 	}
 
-    public void execute() throws MissingTargetException{
+    public String execute() throws MissingTargetException{
         if (target == null){
             throw new MissingTargetException();
         }
 
+        int originalHP = target.getHealthPoints();
         int damage = Math.max(0, user.getAttack() - target.getDefense());
-        int newHp = Math.max(0, target.getHealthPoints() - damage);
+        int newHP = Math.max(0, originalHP - damage);
 
-        target.setHealthPoints(newHp);
+        target.setHealthPoints(newHP);
+
+        return user.getName() + " used Basic Attack on " + target.getName() + " (HP: " + originalHP + " -> " + newHP + ")";
     }
 
     public Action copy(){

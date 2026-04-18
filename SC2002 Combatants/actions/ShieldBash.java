@@ -14,7 +14,7 @@ public class ShieldBash extends SpecialAction implements Targetable{
 		target = null;
 	}
 	
-	public void execute() throws MissingTargetException, ActionOnCooldownException{
+	public String execute() throws MissingTargetException, ActionOnCooldownException{
 		if (this.cooldown > 0){
 			throw new ActionOnCooldownException(this.cooldown);
 		}
@@ -24,12 +24,13 @@ public class ShieldBash extends SpecialAction implements Targetable{
 		}
 
         // Deal BasicAttack damage
+		int originalHP = target.getHealthPoints();
         int damage = Math.max(0, user.getAttack() - target.getDefense());
-        int newHp = Math.max(0, target.getHealthPoints() - damage);
-        target.setHealthPoints(newHp);
+        int newHP = Math.max(0, originalHP - damage);
+        target.setHealthPoints(newHP);
 
        
-        if (newHp > 0) {
+        if (newHP > 0) {
             Stun stun = new Stun(target);
             target.applyStatus(stun);
         }
@@ -37,7 +38,8 @@ public class ShieldBash extends SpecialAction implements Targetable{
 
         // Set cooldown (3 turns including current)
         this.cooldown = 3;
-        
+
+        return user.getName() + " used Shield Bash on " + target.getName() + " (HP: " + originalHP + " -> " + newHP + ")" + "\n" + target.getName() + "is stunned";
     }
 
 	public Action copy(){

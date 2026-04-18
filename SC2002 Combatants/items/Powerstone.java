@@ -28,7 +28,7 @@ public class Powerstone extends Item {
 
         int originalCooldown = action.getCooldown();
         action.setCooldown(0); // Set Cooldown to 0
-        PlayerControl.doAction(player, action);
+        PlayerControl.doAction(action);
         action.setCooldown(originalCooldown); // Restore cooldown to original value
 
         used = true;

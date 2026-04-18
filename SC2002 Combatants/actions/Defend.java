@@ -10,9 +10,11 @@ public class Defend extends Action {
 	}
 
     @Override
-    public void execute() {
+    public String execute() {
         DefendStatus defendStatus = new DefendStatus(user);
         user.applyStatus(defendStatus);
+
+        return user.getName() + " used Defend";
     }
 
     public Action copy(){

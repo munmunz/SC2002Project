@@ -16,19 +16,18 @@ public class PlayerControl {
 
             choice.setUser(player);
 
-            boolean success = doAction(player,choice);
+            boolean success = doAction(choice);
             if (success){
                 return;
             }else continue;
         }
     }
 
-    public static boolean doAction(Player player, Action action){
+    public static boolean doAction(Action action){
         // Return true if action done successfully, false if action is not possible to be done
         while (true){
             try{
-                action.execute();
-                GameUI.displayAction(action);
+                GameUI.displayAction(action.execute());
                 return true;
             } 
             catch (MissingTargetException e){
@@ -40,6 +39,7 @@ public class PlayerControl {
                 return false;
             }
             catch (MissingItemException e){
+                Player player = (Player) action.getUser();
                 Item item = PlayerUI.chooseItem(player.getItems());
                 if (item == null){
                     return false;

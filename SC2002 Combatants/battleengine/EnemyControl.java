@@ -16,7 +16,6 @@ public class EnemyControl {
             ((Targetable)move).setTarget(BattleField.getPlayer());
         }
 
-        move.execute();
-        GameUI.displayAction(move);
+        GameUI.displayAction(move.execute());;
     }
 }
