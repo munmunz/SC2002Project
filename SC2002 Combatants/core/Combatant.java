@@ -51,6 +51,11 @@ public abstract class Combatant{
             if (currentStatus.getCooldown() == 0) {
                 iterator.remove();
             }
+
+            // If status is not applied, apply it
+            if (currentStatus.isApplied() == false){
+                currentStatus.apply();
+            }
         }
     }
 

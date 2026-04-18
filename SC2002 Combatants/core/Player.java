@@ -26,16 +26,7 @@ public abstract class Player extends Combatant {
     }
 
     public void decrement() {
-        Iterator<Status> iterator = this.getStatus().iterator(); // Decrement Status
-        while (iterator.hasNext()) {
-            Status currentStatus = iterator.next();
-            
-            currentStatus.decrementStatus(); 
-            
-            if (currentStatus.getCooldown() == 0) {
-                iterator.remove();
-            }
-        }
+        super.decrement(); // Decrement Statuses
 
         Iterator<Action> iterator2 = this.getActions().iterator(); // Decrement special skill cooldown
         while (iterator2.hasNext()) {
